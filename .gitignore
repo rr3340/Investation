@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -169,3 +170,25 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+=======
+#Ignore virtual environments
+backend/venv/
+ml_services/venv/
+
+#Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+#Ignore environment files
+backend/.env
+ml_services/.env
+
+#Ignore database files
+backend/dev.db
+
+#Ignore migrations
+backend/migrations/
+
+#Ignore macOS system files
+.DS_Store
+>>>>>>> 252db2e (Initial commit)

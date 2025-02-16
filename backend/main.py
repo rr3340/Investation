@@ -1,0 +1,51 @@
+from flask import Flask
+from flask_restx import Api
+from models import User, AuthenticationUser
+from exts import db
+from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
+from datetime import datetime, timedelta
+from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required
+from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.orm import undefer
+from user import user_ns, usertype_ns
+from stock import stock_ns, historicstock_ns
+from portfolio import portfolio_ns
+from investments import investment_ns
+from watchlist import watchlist_ns
+from tradehistory import trade_history_ns
+from pricealert import pricealert_ns
+from auth import auth_ns
+
+api = Api(version='1.0', title='Finance App API', description='API for Finance App')
+
+def create_app(config):
+    app = Flask(__name__)
+    bcrypt = Bcrypt(app)
+    app.config.from_object(config)
+    db.init_app(app)
+
+    migrate = Migrate(app, db)
+    JWTManager(app)
+
+    api.init_app(app)
+    
+    api.add_namespace(auth_ns)
+    api.add_namespace(user_ns)
+    api.add_namespace(usertype_ns)
+    api.add_namespace(stock_ns)
+    api.add_namespace(historicstock_ns)
+    api.add_namespace(portfolio_ns)
+    api.add_namespace(investment_ns)
+    api.add_namespace(watchlist_ns)
+    api.add_namespace(trade_history_ns)
+    api.add_namespace(pricealert_ns)
+        
+    @app.shell_context_processor
+    def make_shell_context():
+        return {
+            "db": db,
+            "User": User
+        }
+
+    return app
