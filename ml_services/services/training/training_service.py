@@ -3,7 +3,8 @@ from sklearn.svm import SVR
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dropout, Dense
 from sklearn.metrics import mean_squared_error
-from backend.s3services import load_variables_from_s3, save_variables_to_s3
+from backend.services.cloud_storage.upload_from_db import load_variables_from_s3
+from backend.services.cloud_storage.upload_to_db import save_variables_to_s3
 from dotenv import load_dotenv
 import os
 
