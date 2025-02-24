@@ -101,5 +101,3 @@ def lstm_scaler(key):
     }
 
     variables = save_variables_to_s3(variables) #Save the variables to s3
-
-

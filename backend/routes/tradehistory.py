@@ -1,10 +1,11 @@
 from flask_restx import Resource, Namespace, fields
-from models import TradeHistory
+from backend.models import TradeHistory
 from flask import request
 from flask_jwt_extended import jwt_required
 from datetime import datetime
-from services import get_trade_history
-from decorator import admin_required 
+from backend.services.trade_history.get_trade_history import get_trade_history
+from backend.utilities.decorators import admin_required
+from backend.services.trade_history.get_trade_history import get_trade_history
 
 trade_history_ns = Namespace('trade_history', description='User related operations')
 
@@ -21,7 +22,7 @@ trade_history_model = trade_history_ns.model(
     }
 )
 
-@trade_history_ns.route('/trade_history')
+@trade_history_ns.route('/')
 class TradeHistoryResource(Resource):
     @jwt_required()
     @trade_history_ns.marshal_list_with(trade_history_model)
@@ -51,7 +52,7 @@ class TradeHistoryResource(Resource):
         new_trade.save()
         return new_trade, 201
 
-@trade_history_ns.route('/trade_history/<int:id>')
+@trade_history_ns.route('/<int:id>')
 class TradeHistoryResourceById(Resource):
     @jwt_required()
     @trade_history_ns.marshal_with(trade_history_model)
@@ -84,7 +85,7 @@ class TradeHistoryResourceById(Resource):
         delete_trade.delete()
         return delete_trade
     
-@trade_history_ns.route('/trade_history/user/<int:user_id>')
+@trade_history_ns.route('/user/<int:user_id>')
 class TradeHistoryByUserResource(Resource):
     @jwt_required()
     @trade_history_ns.response(200, 'Success')
