@@ -96,9 +96,11 @@ class StockResourceById(Resource):
 class UpdateStockDataResource(Resource):
     @jwt_required()
     @admin_required
-    def get(self):
+    def post(self):
         """Trigger live pipeline to update stock data"""
-        live_pipeline()
+        data = request.get_json()
+        key = data.get('key')
+        live_pipeline(key)
         return {"message": "Stock data updated successfully"}, 200
     
 @stock_ns.route('/connect_to_s3')

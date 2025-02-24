@@ -4,6 +4,7 @@ from backend.models.portfoliouser import PortfolioUser
 from backend.models.investment import Investment
 from backend.models.historicstock import HistoricStock
 from backend.models.tradehistory import TradeHistory
+from backend.services.portfolio.calculate_networth import calculate_networth
 from backend.exts import db
 from datetime import datetime
 from sqlalchemy import desc
