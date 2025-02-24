@@ -1,6 +1,6 @@
 from functools import wraps
 from flask_jwt_extended import get_jwt_identity, jwt_required
-from models import User
+from backend.models import User
 
 def admin_required(fn):
     @wraps(fn)

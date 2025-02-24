@@ -1,11 +1,11 @@
 from flask_restx import Resource, Namespace, fields
-from models import Investment
-from flask import Flask, request,jsonify
+from backend.models import Investment
+from flask import Flask, request, jsonify
 from flask_jwt_extended import JWTManager, jwt_required
 from datetime import datetime
 from dateutil import parser
 import pytz
-from decorator import admin_required
+from backend.utilities.decorators import admin_required
 
 investment_ns = Namespace('investment', description='Investment related operations')
 
@@ -23,7 +23,7 @@ investment_model = investment_ns.model(
     }
     )
 
-@investment_ns.route('/investment')
+@investment_ns.route('/')
 class InvestmentResource(Resource):
     @jwt_required()
     @investment_ns.marshal_list_with(investment_model)
@@ -56,7 +56,7 @@ class InvestmentResource(Resource):
         new_investment.save()
         return new_investment, 201
     
-@investment_ns.route('/investment/<int:id>')
+@investment_ns.route('/<int:id>')
 class InvestmentResourceById(Resource):
     @jwt_required()
     @investment_ns.marshal_with(investment_model)

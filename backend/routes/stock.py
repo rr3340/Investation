@@ -1,13 +1,24 @@
 from flask_restx import Resource, Namespace, fields
-from models import Stock, HistoricStock
+from backend.models import Stock, HistoricStock
 from flask import Flask, request,jsonify
 from datetime import datetime
 from dateutil import parser
 import pytz
 from flask_jwt_extended import jwt_required
-from services import live_pipeline, process_database, svm_scale_database, lstm_scale_database, svm_upload_retrained_model_to_database, lstm_upload_retrained_model_to_database, svm_upload_predictions_to_database, lstm_upload_predictions_to_database, buy_stock, sell_stock, get_latest_price, get_best_prediction, get_historical_data, get_processed_data
-from s3services import connect_to_db
-from decorator import admin_required
+from backend.services.stock_pipeline.activate_stock_pipeline import live_pipeline
+from backend.services.historic_stock.process_stock import process_from_database
+from backend.services.machine_learning.svm_scale_database import svm_scale_database
+from backend.services.machine_learning.lstm_scale_database import lstm_scale_database
+from backend.services.machine_learning.svm_update_model import svm_upload_retrained_model_to_database
+from backend.services.machine_learning.lstm_update_model import lstm_upload_retrained_model_to_database
+from backend.services.machine_learning.svm_create_prediction import svm_upload_predictions_to_database
+from backend.services.machine_learning.lstm_create_predictions import lstm_upload_predictions_to_database
+from backend.services.stock.buy_stock import buy_stock
+from backend.services.stock.sell_stock import sell_stock
+from backend.services.historic_stock.get_latest_price import get_latest_price
+from backend.services.machine_learning.get_best_prediction import get_best_prediction
+from backend.services.cloud_storage.connect_to_db import connect_to_db
+from backend.utilities.decorators import admin_required
 
 stock_ns = Namespace('stock', description = 'Stock related operations')
 
@@ -21,7 +32,7 @@ stock_model = stock_ns.model(
     }
 )
 
-@stock_ns.route('/stock')
+@stock_ns.route('/')
 class StockResource(Resource):
     @jwt_required()
     @stock_ns.marshal_list_with(stock_model)
@@ -49,7 +60,7 @@ class StockResource(Resource):
         
         return new_stock, 201
     
-@stock_ns.route('/stock/<string:stock_key>')
+@stock_ns.route('/<string:stock_key>')
 class StockResourceById(Resource):
     @jwt_required()
     @stock_ns.marshal_with(stock_model)
@@ -132,7 +143,7 @@ class ProcessStockDataResource(Resource):
     @admin_required
     def get(self):
         """Trigger live pipeline to process stock data"""
-        process_database()
+        process_from_database()
         return {"message": "Stock data processed successfully"}, 200
     
 @stock_ns.route('/train_svm_model')
@@ -179,7 +190,7 @@ class PredictLSTMModelStockDataResource(Resource):
         lstm_upload_predictions_to_database(key)
         return {"message": "Successfully predicted future stock data interval on LSTM training model"}, 200
     
-@stock_ns.route('/stock/buy_stock')
+@stock_ns.route('/buy_stock')
 class BuyStockResource(Resource):
     @jwt_required()
     @stock_ns.expect(stock_model)
@@ -192,7 +203,7 @@ class BuyStockResource(Resource):
         buy_stock(user_id, stock_key, quantity)
         return {"message": f"Successfully bought {quantity} shares of {stock_key}"}, 200
 
-@stock_ns.route('/stock/sell_stock')
+@stock_ns.route('/sell_stock')
 class SellStockResource(Resource):
     @jwt_required()
     @stock_ns.expect(stock_model)
@@ -205,7 +216,7 @@ class SellStockResource(Resource):
         sell_stock(user_id, stock_key, quantity)
         return {"message": f"Successfully sold {quantity} shares of {stock_key}"}, 200
     
-@stock_ns.route('/stock/latest_price/<string:stock_key>')
+@stock_ns.route('/latest_price/<string:stock_key>')
 class LatestPriceResource(Resource):
     @jwt_required()
     @stock_ns.response(200, 'Success')
@@ -218,7 +229,7 @@ class LatestPriceResource(Resource):
         except Exception as e:
             stock_ns.abort(404, str(e))
 
-@stock_ns.route('/stock/best_prediction/<string:stock_key>')
+@stock_ns.route('/best_prediction/<string:stock_key>')
 class BestPredictionResource(Resource):
     @jwt_required()
     @stock_ns.response(200, 'Success')
@@ -230,152 +241,3 @@ class BestPredictionResource(Resource):
             return prediction, 200
         except Exception as e:
             stock_ns.abort(404, str(e))
-
-historicstock_ns = Namespace('histstock', description='Historic stock related operations')
-
-historic_stock_model = historicstock_ns.model(
-    'HistoricStock',
-    {
-        "record_id": fields.Integer(required=True, description="Record ID", example=1),
-        "stock_key": fields.String(required=True, description="Stock key", example="AAPL"),
-        "datetime": fields.DateTime(required=True, description="Datetime", example="2021-09-01T00:00:00Z"),
-        "open": fields.Float(required=False, description="Open price", example=145.00),
-        "high": fields.Float(required=False, description="High price", example=155.00),
-        "low": fields.Float(required=False, description="Low price", example=140.00),
-        "close": fields.Float(required=False, description="Close price", example=150.00),
-        "volume": fields.Float(required=False, description="Volume", example=1000000)
-    }
-)
-
-@historicstock_ns.route('/histstock')
-class HistoricStockResource(Resource):
-    @jwt_required()
-    @historicstock_ns.marshal_list_with(historic_stock_model)
-    def get(self):
-        """Get all historic stocks"""
-        all_stock = HistoricStock.query.all()
-        return all_stock
-    
-    @jwt_required()
-    @admin_required
-    @historicstock_ns.marshal_with(historic_stock_model)
-    @historicstock_ns.expect(historic_stock_model)
-    def post(self):
-        """Create a historic stock record"""
-        data = request.get_json()
-        
-        datetime_obj = parser.parse(data.get("datetime"))
-        
-        stock_record = HistoricStock(
-            stock_key=data.get("stock_key"),
-            datetime=datetime_obj,
-            open=data.get("open"),
-            high=data.get("high"),
-            low=data.get("low"),
-            close=data.get("close"),
-            volume=data.get("volume")
-        )
-        
-        
-        stock_record.save()
-        
-        return stock_record, 201
-    
-@historicstock_ns.route('/histstock/<int:id>')
-class HistoricStockResourceById(Resource):
-    @jwt_required()
-    @historicstock_ns.marshal_with(historic_stock_model)
-    def get(self, id):
-        """Get historic stock information by the id"""
-        all_hist_stock = HistoricStock.query.get_or_404(id)
-        
-        return all_hist_stock
-    
-    @jwt_required()
-    @admin_required
-    @historicstock_ns.marshal_with(historic_stock_model)
-    def put(self, id):
-        """Update historic stock"""
-        update_stock_record = HistoricStock.query.get_or_404(id)
-        data = request.get_json()
-        datetime_obj = parser.parse(data["datetime"])
-        data["datetime"] = datetime_obj
-        update_stock_record.update(**data)
-        return update_stock_record
-    
-    @jwt_required()
-    @admin_required
-    @historicstock_ns.marshal_with(historic_stock_model)
-    def delete(self, id):
-        """Delete historic stock by id"""
-        delete_stock_record = HistoricStock.query.get_or_404(id)
-        
-        delete_stock_record.delete()
-        
-        return delete_stock_record
-    
-@historicstock_ns.route('/histstock/historicdata')
-class HistoricalDataResource(Resource):
-    @jwt_required()
-    @historicstock_ns.response(200, 'Success')
-    @historicstock_ns.response(400, 'Invalid input')
-    @historicstock_ns.response(404, 'Stock not found')
-    def post(self):
-        try:
-            data = request.get_json()
-            if not data:
-                return {"error": "Missing JSON payload."}, 400
-
-            stock_key = data.get("stock_key")
-            start_date = data.get("start_date")
-            end_date = data.get("end_date")
-            interval = data.get("interval")
-            limit = data.get("limit")
-
-            print(f"Received API request: stock_key={stock_key}, start_date={start_date}, end_date={end_date}, interval={interval}, limit={limit}")
-
-            if not stock_key:
-                return {"error": "Missing stock_key."}, 400
-
-            try:
-                if start_date:
-                    start_date = datetime.fromisoformat(start_date)
-                    print(f"Parsed start_date: {start_date}")
-                if end_date:
-                    end_date = datetime.fromisoformat(end_date)
-                    print(f"Parsed end_date: {end_date}")
-            except ValueError:
-                return {"error": "Invalid date format. Use ISO format (YYYY-MM-DDTHH:MM:SS)."}, 400
-
-            if interval:
-                try:
-                    interval = int(interval)
-                except ValueError:
-                    return {"error": "Invalid interval. It must be an integer."}, 400
-
-            if limit:
-                try:
-                    limit = int(limit)
-                except ValueError:
-                    return {"error": "Invalid limit. It must be an integer."}, 400
-
-            historical_data = get_historical_data(stock_key, interval, start_date, end_date, limit)
-
-            return historical_data.to_dict(orient='records'), 200
-
-        except Exception as e:
-            print(f"Exception occurred: {e}")
-            return {"error": str(e)}, 500
-
-@historicstock_ns.route('/processed_data/<string:stock_key>')
-class ProcessedDataResource(Resource):
-    @jwt_required()
-    @historicstock_ns.response(200, 'Success')
-    @historicstock_ns.response(404, 'Processed data not found')
-    def get(self, stock_key):
-        """Get processed data for a stock"""
-        try:
-            processed_data = get_processed_data(stock_key)
-            return processed_data.to_dict(orient='records'), 200
-        except Exception as e:
-            historicstock_ns.abort(404, str(e))

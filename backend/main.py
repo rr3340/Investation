@@ -1,21 +1,32 @@
 from flask import Flask
 from flask_restx import Api
-from models import User, AuthenticationUser
-from exts import db
+from backend.models.users import User
+from backend.models.authentication import AuthenticationUser
+from backend.models.usertype import UserType
+from backend.models.portfoliouser import PortfolioUser
+from backend.models.stock import Stock
+from backend.models.historicstock import HistoricStock
+from backend.models.investment import Investment
+from backend.models.tradehistory import TradeHistory
+from backend.models.watchlist import Watchlist
+from backend.models.pricealert import PriceAlert
+from backend.exts import db
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from datetime import datetime, timedelta
 from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import undefer
-from user import user_ns, usertype_ns
-from stock import stock_ns, historicstock_ns
-from portfolio import portfolio_ns
-from investments import investment_ns
-from watchlist import watchlist_ns
-from tradehistory import trade_history_ns
-from pricealert import pricealert_ns
-from auth import auth_ns
+from backend.routes.user import user_ns
+from backend.routes.stock import stock_ns
+from backend.routes.historicstock import historicstock_ns
+from backend.routes.usertype import usertype_ns
+from backend.routes.portfolio import portfolio_ns
+from backend.routes.investments import investment_ns
+from backend.routes.watchlist import watchlist_ns
+from backend.routes.tradehistory import trade_history_ns
+from backend.routes.pricealert import pricealert_ns
+from backend.routes.authorization import auth_ns
 
 api = Api(version='1.0', title='Finance App API', description='API for Finance App')
 

@@ -1,10 +1,11 @@
 from flask_restx import Resource, Namespace, fields
-from models import Watchlist, User
+from backend.models import Watchlist, User
 from flask import request
 from flask_jwt_extended import jwt_required
 from datetime import datetime
-from services import add_to_watchlist
-from decorator import admin_required
+from backend.utilities.decorators import admin_required
+from backend.services.watchlist.add_to_watchlist import add_to_watchlist
+from backend.services.watchlist.delete_from_watchlist import delete_from_watchlist
 
 watchlist_ns = Namespace('watchlist', description='User related operations')
 
@@ -18,7 +19,7 @@ watchlist_model = watchlist_ns.model(
     }
 )
 
-@watchlist_ns.route('/watchlist')
+@watchlist_ns.route('/')
 class WatchlistResource(Resource):
     @jwt_required()
     @watchlist_ns.marshal_list_with(watchlist_model)
@@ -45,7 +46,7 @@ class WatchlistResource(Resource):
         watchlist.save()
         return watchlist, 201
 
-@watchlist_ns.route('/watchlist/<int:id>')
+@watchlist_ns.route('/<int:id>')
 class WatchlistResourceById(Resource):
     @jwt_required()
     @watchlist_ns.marshal_with(watchlist_model)
@@ -78,7 +79,7 @@ class WatchlistResourceById(Resource):
         delete_watchlist.delete()
         return delete_watchlist
     
-@watchlist_ns.route('/watchlist/add_to_watchlist')
+@watchlist_ns.route('/add_to_watchlist')
 class AddToWatchlistResource(Resource):
     @jwt_required()
     @watchlist_ns.expect(watchlist_model)
@@ -90,5 +91,20 @@ class AddToWatchlistResource(Resource):
         try:
             result = add_to_watchlist(user_id, stock_key)
             return result, 201
+        except Exception as e:
+            watchlist_ns.abort(404, str(e))
+
+@watchlist_ns.route('/delete_from_watchlist')
+class DeleteFromWatchlistResource(Resource):
+    @jwt_required()
+    @watchlist_ns.expect(watchlist_model)
+    def delete(self):
+        """Delete from watchlist"""
+        data = request.get_json()
+        user_id = data.get("user_id")
+        stock_key = data.get("stock_key")
+        try:
+            result = delete_from_watchlist(user_id, stock_key)
+            return result, 200
         except Exception as e:
             watchlist_ns.abort(404, str(e))

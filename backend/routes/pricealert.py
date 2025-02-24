@@ -1,10 +1,12 @@
 from flask_restx import Resource, Namespace, fields
-from models import PriceAlert
+from backend.models import PriceAlert
 from flask import request
 from flask_jwt_extended import jwt_required
 from datetime import datetime
-from services import set_price_alert
-from decorator import admin_required
+from backend.services.price_alert.set_price_alert import set_price_alert
+from backend.services.price_alert.delete_price_alert import delete_price_alert
+from backend.services.price_alert.check_price_alerts import check_price_alerts
+from backend.utilities.decorators import admin_required
 
 pricealert_ns = Namespace('pricealerts', description='Price Alert related operations')
 
@@ -20,7 +22,7 @@ pricealert_model = pricealert_ns.model(
     }
 )
 
-@pricealert_ns.route('/pricealerts')
+@pricealert_ns.route('/')
 class PriceAlertResource(Resource):
     @jwt_required()
     @pricealert_ns.marshal_list_with(pricealert_model)
@@ -49,7 +51,7 @@ class PriceAlertResource(Resource):
         pricealert.save()
         return pricealert, 201
 
-@pricealert_ns.route('/pricealerts/<int:id>')
+@pricealert_ns.route('/<int:id>')
 class PriceAlertResourceById(Resource):
     @jwt_required()
     @pricealert_ns.marshal_with(pricealert_model)
@@ -82,7 +84,7 @@ class PriceAlertResourceById(Resource):
         delete_pricealert.delete()
         return delete_pricealert
     
-@pricealert_ns.route('/pricealerts/set_price_alert')
+@pricealert_ns.route('/set_price_alert')
 class SetPriceAlertResource(Resource):
     @jwt_required()
     @pricealert_ns.expect(pricealert_model)
@@ -95,5 +97,27 @@ class SetPriceAlertResource(Resource):
         try:
             result = set_price_alert(user_id, stock_key, target_price)
             return result, 201
+        except Exception as e:
+            pricealert_ns.abort(404, str(e))
+            
+@pricealert_ns.route('/delete_price_alert/<int:alert_id>')
+class DeletePriceAlertResource(Resource):
+    @jwt_required()
+    def delete(self, alert_id):
+        """Delete a price alert"""
+        try:
+            result = delete_price_alert(alert_id)
+            return result, 200
+        except Exception as e:
+            pricealert_ns.abort(404, str(e))
+            
+@pricealert_ns.route('/check_price_alerts')
+class CheckPriceAlertsResource(Resource):
+    @jwt_required()
+    def get(self):
+        """Check price alerts"""
+        try:
+            result = check_price_alerts()
+            return {"triggered_alerts": result}, 200
         except Exception as e:
             pricealert_ns.abort(404, str(e))

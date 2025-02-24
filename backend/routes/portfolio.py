@@ -1,9 +1,12 @@
 from flask_restx import Resource, Namespace, fields
-from models import User, PortfolioUser, Investment
+from backend.models import User, PortfolioUser, Investment
 from flask import Flask, request, jsonify
 from flask_jwt_extended import JWTManager, jwt_required
-from services import calculate_networth, get_portfolio_summary, calculate_unrealized_gains, update_risk_profile
-from decorator import admin_required
+from backend.utilities.decorators import admin_required
+from backend.services.portfolio.calculate_networth import calculate_networth
+from backend.services.portfolio.get_portfolio_summary import get_portfolio_summary
+from backend.services.portfolio.calculate_unrealized_gains import calculate_unrealized_gains
+from backend.services.portfolio.update_risk_profile import update_risk_profile
 
 portfolio_ns = Namespace('portfolio', description='User portfolio related operations')
 
@@ -22,7 +25,7 @@ portfolio_user_model = portfolio_ns.model(
     }
 )
 
-@portfolio_ns.route('/user_portfolio')
+@portfolio_ns.route('/')
 class PortfolioUserResource(Resource):
     @jwt_required()
     @portfolio_ns.marshal_list_with(portfolio_user_model)
@@ -70,7 +73,7 @@ class PortfolioUserResource(Resource):
             
             return new_user_portfolio, 201
     
-@portfolio_ns.route('/user_portfolio/<int:id>')
+@portfolio_ns.route('/<int:id>')
 class PortfolioUserResourceById(Resource):
     @jwt_required()
     @portfolio_ns.marshal_with(portfolio_user_model)
@@ -116,7 +119,7 @@ class PortfolioUserResourceById(Resource):
         delete_user_portfolio.delete()
         return delete_user_portfolio
     
-@portfolio_ns.route('/user_portfolio/summary/<int:user_id>')
+@portfolio_ns.route('/summary/<int:user_id>')
 class PortfolioSummaryResource(Resource):
     @jwt_required()
     @portfolio_ns.response(200, 'Success')
@@ -129,7 +132,7 @@ class PortfolioSummaryResource(Resource):
         except Exception as e:
             portfolio_ns.abort(404, str(e))
 
-@portfolio_ns.route('/user_portfolio/unrealized_gains/<int:user_id>')
+@portfolio_ns.route('/unrealized_gains/<int:user_id>')
 class UnrealizedGainsResource(Resource):
     @jwt_required()
     @portfolio_ns.response(200, 'Success')
@@ -142,7 +145,7 @@ class UnrealizedGainsResource(Resource):
         except Exception as e:
             portfolio_ns.abort(404, str(e))
 
-@portfolio_ns.route('/user_portfolio/networth/<int:portfolio_user_id>')
+@portfolio_ns.route('/networth/<int:portfolio_user_id>')
 class NetworthResource(Resource):
     @jwt_required()
     @portfolio_ns.response(200, 'Success')
@@ -155,7 +158,7 @@ class NetworthResource(Resource):
         except Exception as e:
             portfolio_ns.abort(404, str(e))
             
-@portfolio_ns.route('/user_portfolio/risk_profile/<int:user_id>')
+@portfolio_ns.route('/risk_profile/<int:user_id>')
 class RiskProfileResource(Resource):
     @jwt_required()
     @portfolio_ns.expect(portfolio_user_model)

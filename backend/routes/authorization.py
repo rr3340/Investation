@@ -1,11 +1,10 @@
 from flask_restx import Resource, Namespace, fields
-from models import User, AuthenticationUser
+from backend.models import User, AuthenticationUser
+from flask import Flask, request, jsonify
 from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required, get_jwt_identity
 from werkzeug.security import generate_password_hash, check_password_hash
-from sqlalchemy.orm import undefer
-from flask import Flask, request,jsonify
 from datetime import datetime, timedelta
-from decorator import admin_required
+from backend.utilities.decorators import admin_required
 
 auth_ns = Namespace('auth', description = 'Authentication related operations')
 
