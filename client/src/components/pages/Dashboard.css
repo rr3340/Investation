@@ -1,0 +1,318 @@
+/* Dashboard Styles - Pet Sounds Aesthetic */
+.dashboard-page {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+.dashboard-container {
+  max-width: 1200px;
+}
+
+.dashboard-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-welcome {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.dashboard-card .card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-card-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+  color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.1);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-card-content {
+  flex: 1;
+}
+
+.dashboard-card-title {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #7f8c8d;
+}
+
+.dashboard-card-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: #2c3e50;
+}
+
+.dashboard-card-change {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.dashboard-card-change.positive {
+  color: #27ae60;
+}
+
+.dashboard-card-change.negative {
+  color: #e74c3c;
+}
+
+.dashboard-card-label {
+  font-size: 0.85rem;
+  color: #95a5a6;
+}
+
+.dashboard-card-link {
+  color: #e74c3c;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  display: inline-block;
+}
+
+.dashboard-card-link:hover {
+  text-decoration: underline;
+  color: #c0392b;
+}
+
+/* Dashboard Section Cards */
+.dashboard-section-card {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-section-header {
+  background-color: #f5f7fa;
+  border-bottom: 1px solid #e6e9ed;
+  padding: 1rem 1.25rem;
+}
+
+.dashboard-section-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+  color: #34495e;
+}
+
+.dashboard-section-card .card-body {
+  padding: 1.25rem;
+}
+
+/* Chart Placeholder */
+.chart-placeholder {
+  background-color: #f5f7fa;
+  border-radius: 8px;
+  padding: 3rem 1rem;
+  text-align: center;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #7f8c8d;
+}
+
+.chart-icon {
+  font-size: 3rem;
+  color: #e74c3c;
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+
+/* Watchlist Highlights */
+.watchlist-highlights {
+  padding: 0.5rem;
+}
+
+.watchlist-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.watchlist-item:last-child {
+  border-bottom: none;
+}
+
+.watchlist-symbol {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #2c3e50;
+}
+
+.watchlist-price {
+  font-weight: 500;
+  color: #34495e;
+}
+
+.watchlist-change {
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.watchlist-change.positive {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+.watchlist-change.negative {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+/* Recent Transactions */
+.recent-transactions {
+  padding: 0.5rem;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-type {
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  min-width: 60px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.transaction-type.buy {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+.transaction-type.sell {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.transaction-details {
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.transaction-symbol {
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.transaction-quantity {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+}
+
+.transaction-price {
+  font-weight: 500;
+  color: #34495e;
+}
+
+.transaction-date {
+  color: #95a5a6;
+  font-size: 0.85rem;
+}
+
+/* Buttons */
+.btn-outline-primary {
+  color: #e74c3c;
+  border-color: #e74c3c;
+}
+
+.btn-outline-primary:hover {
+  background-color: #e74c3c;
+  border-color: #e74c3c;
+  color: white;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .dashboard-card-value {
+    font-size: 1.3rem;
+  }
+  
+  .chart-placeholder {
+    min-height: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-page {
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+  }
+  
+  .dashboard-title {
+    font-size: 1.6rem;
+  }
+  
+  .dashboard-welcome {
+    font-size: 1rem;
+  }
+  
+  .transaction-item {
+    flex-wrap: wrap;
+  }
+  
+  .transaction-type {
+    margin-bottom: 0.5rem;
+  }
+  
+  .transaction-details {
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+  
+  .transaction-price,
+  .transaction-date {
+    width: 50%;
+    text-align: left;
+  }
+} 

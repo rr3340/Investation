@@ -16,7 +16,7 @@ def svm_scaler(key):
     
     variables = {
         f'processed_{key}_stock': (PROCESSED_STORAGE, f'processed_{key}_stock.csv')
-    } #Load the variables from s3
+    } # Load the variables from s3
     
     df = load_variables_from_s3(variables)
     
@@ -29,14 +29,14 @@ def svm_scaler(key):
        'Upper Band', 'Lower Band', 'Williams R%', '%K Fast', '%D Slow',
        'Price Rate of Change', 'adx', 'Variation']] #Store x variable features for svr model
     
-    y = svm_df['Shift For Target']#Test for the next value which is shifting for target
+    y = svm_df['Shift For Target'] # Test for the next value which is shifting for target
     
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)#Split training and testing data
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42) # Split training and testing data
 
-    svm_scaler = StandardScaler() #Establish the svm standard scaler
+    svm_scaler = StandardScaler() # Establish the svm standard scaler
 
     x_train_normalized = svm_scaler.fit_transform(x_train)
-    x_test_normalized = svm_scaler.transform(x_test) #normalize the x ranges
+    x_test_normalized = svm_scaler.transform(x_test) # Normalize the X ranges
     
     print(x_train_normalized.shape, x_test_normalized.shape, y_train.shape, y_test.shape)
     print(x_train_normalized, x_test_normalized, y_train, y_test)
@@ -47,16 +47,16 @@ def svm_scaler(key):
         'svm_x_test_normalized': (x_test_normalized, PROCESSED_STORAGE, f'svm_x_test_normalized_{key}.npy'),
         'svm_y_train': (y_train, PROCESSED_STORAGE, f'svm_y_train_{key}.npy'),
         'svm_y_test': (y_test, PROCESSED_STORAGE, f'svm_y_test_{key}.npy'),
-    } #Save the variables to s3
+    }
 
-    variables = save_variables_to_s3(variables) #Upload retrained model
+    variables = save_variables_to_s3(variables) # Upload retrained model
     
 from sklearn.preprocessing import MinMaxScaler
 
 def lstm_scaler(key):
     variables = {
         f'processed_{key}_stock': (PROCESSED_STORAGE, f'processed_{key}_stock.csv')
-    } #Save the variables to s3
+    } # Save the variables to s3
     
     df = load_variables_from_s3(variables)
     
@@ -72,12 +72,12 @@ def lstm_scaler(key):
     
     split_test = int((len(mlstm_df)*.2))
     training_set = mlstm_df[:-split_test]
-    test_set = mlstm_df[-split_test:] #Set the split_test per 80% of the code to train and test
+    test_set = mlstm_df[-split_test:] # Set the split_test per 80% of the code to train and test
 
-    minmax_scaler = MinMaxScaler(feature_range=(0,1)) #Set the minmax scaler
+    minmax_scaler = MinMaxScaler(feature_range=(0,1)) # Set the minmax scaler
 
     training_set_scaled = minmax_scaler.fit_transform(training_set)
-    test_set_scaled = minmax_scaler.transform(test_set)#Transform the data 
+    test_set_scaled = minmax_scaler.transform(test_set) # Transform the data 
 
     def create_x_y_axis(df,candles):
         dataX = []
@@ -85,10 +85,10 @@ def lstm_scaler(key):
         for i in range(candles, len(df)):
             dataX.append(df[i - candles:i, 0:df.shape[1]])
             dataY.append(df[i,0])
-        return np.array(dataX),np.array(dataY) #Create the x and y axis through appending said data
+        return np.array(dataX),np.array(dataY) # Create the x and y axis through appending said data
 
     train_X,train_y = create_x_y_axis(training_set_scaled,12)
-    test_X,test_y = create_x_y_axis(test_set_scaled,12) #Then shape the axises including the 12 features
+    test_X,test_y = create_x_y_axis(test_set_scaled,12) # Then shape the axises including the 12 features
     
     print(train_X.shape, train_y.shape, test_X.shape, test_y.shape)
     print(train_X, train_y, test_X, test_y)
@@ -101,4 +101,4 @@ def lstm_scaler(key):
         'scaler': (minmax_scaler, MODEL_STORAGE, f'lstm_scaler_{key}.pkl'),
     }
 
-    variables = save_variables_to_s3(variables) #Save the variables to s3
+    variables = save_variables_to_s3(variables) # Save the variables to s3

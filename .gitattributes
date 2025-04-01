@@ -1,0 +1,79 @@
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# Declare files that will always have LF line endings on checkout
+*.sh text eol=lf
+*.py text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+
+# Denote all files that are truly binary and should not be modified
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar.gz binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.svg binary
+
+# Exclude large model files from GitHub language statistics
+*.pkl linguist-generated=true
+*.h5 linguist-generated=true
+*.joblib linguist-generated=true
+
+# Handle pickle files as binary
+*.pkl binary
+
+# Use Git LFS for large files
+*.h5 filter=lfs diff=lfs merge=lfs -text
+*.pkl filter=lfs diff=lfs merge=lfs -text
+*.joblib filter=lfs diff=lfs merge=lfs -text
+*.csv filter=lfs diff=lfs merge=lfs -text
+
+# Python
+*.py text diff=python
+*.pyi text diff=python
+*.pyx text diff=python
+*.pyz text diff=python
+*.pyd binary
+*.pyc binary
+
+# Documentation
+*.txt text
+LICENSE text
+README text
+
+# Configurations
+*.lock text
+*.ini text
+*.cfg text
+
+# Exclude minified/bundled JS from diffs
+*.min.js binary
+*.bundle.js binary
+
+# Graphics
+*.svg text
+
+# ML/Data files - mark large data files as binary
+*.xlsx binary
+*.parquet binary
+*.npy binary
+*.keras binary
+*.model binary

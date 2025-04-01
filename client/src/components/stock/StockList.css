@@ -1,0 +1,63 @@
+.stock-list {
+    margin-bottom: 2rem;
+}
+
+.stock-list-controls {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.sort-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.sort-by {
+    color: #666;
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+
+.sort-option {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    margin-right: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+.sort-option:hover {
+    background-color: #e9ecef;
+}
+
+.sort-option.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.sort-option svg {
+    margin-left: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .sort-controls {
+        justify-content: flex-start;
+        margin-top: 1rem;
+    }
+    
+    .sort-option {
+        margin-bottom: 0.5rem;
+        font-size: 0.8rem;
+        padding: 0.2rem 0.5rem;
+    }
+} 

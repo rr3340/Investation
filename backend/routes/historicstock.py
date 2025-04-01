@@ -8,6 +8,10 @@ import pytz
 from backend.utilities.decorators import admin_required
 from backend.services.historic_stock.get_processed_stock import get_processed_data
 from backend.services.historic_stock.get_historical_stock import get_historical_data
+from backend.services.historic_stock.cleanup_duplicate_datetimes import cleanup_duplicate_datetimes_for_stock, cleanup_duplicate_datetimes_all_stocks
+import logging
+
+logger = logging.getLogger('historicstock_routes')
 
 historicstock_ns = Namespace('histstock', description='Historic stock related operations')
 
@@ -27,7 +31,6 @@ historic_stock_model = historicstock_ns.model(
 
 @historicstock_ns.route('/')
 class HistoricStockResource(Resource):
-    @jwt_required()
     @historicstock_ns.marshal_list_with(historic_stock_model)
     def get(self):
         """Get all historic stocks"""
@@ -54,14 +57,13 @@ class HistoricStockResource(Resource):
             volume=data.get("volume")
         )
         
-        
+        # Save the stock record to the database
         stock_record.save()
         
         return stock_record, 201
     
 @historicstock_ns.route('/<int:id>')
 class HistoricStockResourceById(Resource):
-    @jwt_required()
     @historicstock_ns.marshal_with(historic_stock_model)
     def get(self, id):
         """Get historic stock information by the id"""
@@ -94,7 +96,6 @@ class HistoricStockResourceById(Resource):
     
 @historicstock_ns.route('/historicdata')
 class HistoricalDataResource(Resource):
-    @jwt_required()
     @historicstock_ns.response(200, 'Success')
     @historicstock_ns.response(400, 'Invalid input')
     @historicstock_ns.response(404, 'Stock not found')
@@ -110,7 +111,7 @@ class HistoricalDataResource(Resource):
             interval = data.get("interval")
             limit = data.get("limit")
 
-            print(f"Received API request: stock_key={stock_key}, start_date={start_date}, end_date={end_date}, interval={interval}, limit={limit}")
+            # print(f"Received API request: stock_key={stock_key}, start_date={start_date}, end_date={end_date}, interval={interval}, limit={limit}")
 
             if not stock_key:
                 return {"error": "Missing stock_key."}, 400
@@ -118,10 +119,10 @@ class HistoricalDataResource(Resource):
             try:
                 if start_date:
                     start_date = datetime.fromisoformat(start_date)
-                    print(f"Parsed start_date: {start_date}")
+                    # print(f"Parsed start_date: {start_date}")
                 if end_date:
                     end_date = datetime.fromisoformat(end_date)
-                    print(f"Parsed end_date: {end_date}")
+                    # print(f"Parsed end_date: {end_date}")
             except ValueError:
                 return {"error": "Invalid date format. Use ISO format (YYYY-MM-DDTHH:MM:SS)."}, 400
 
@@ -142,12 +143,11 @@ class HistoricalDataResource(Resource):
             return historical_data.to_dict(orient='records'), 200
 
         except Exception as e:
-            print(f"Exception occurred: {e}")
+            # print(f"Exception occurred: {e}")
             return {"error": str(e)}, 500
 
 @historicstock_ns.route('/processed_data/<string:stock_key>')
 class ProcessedDataResource(Resource):
-    @jwt_required()
     @historicstock_ns.response(200, 'Success')
     @historicstock_ns.response(404, 'Processed data not found')
     def get(self, stock_key):
@@ -157,3 +157,66 @@ class ProcessedDataResource(Resource):
             return processed_data.to_dict(orient='records'), 200
         except Exception as e:
             historicstock_ns.abort(404, str(e))
+
+@historicstock_ns.route('/cleanup_duplicates')
+class CleanupDuplicatesResource(Resource):
+    @jwt_required()
+    @admin_required
+    @historicstock_ns.response(200, 'Success')
+    @historicstock_ns.response(400, 'Invalid input')
+    @historicstock_ns.response(500, 'Server error')
+    def post(self):
+        try:
+            data = request.get_json() or {}
+            
+            # Check if a specific stock was provided
+            if 'stock_key' in data and data['stock_key']:
+                stock_key = data['stock_key'].upper()
+                logger.info(f"Initiating duplicate datetime cleanup for specific stock: {stock_key}")
+                result = cleanup_duplicate_datetimes_for_stock(stock_key)
+                
+                return {
+                    "message": f"Duplicate datetime cleanup completed for {stock_key}",
+                    "details": result
+                }, 200
+            else:
+                # Clean up duplicates for all stocks
+                logger.info("Initiating duplicate datetime cleanup for all stocks")
+                result = cleanup_duplicate_datetimes_all_stocks()
+                
+                return {
+                    "message": "Duplicate datetime cleanup completed for all stocks",
+                    "details": result
+                }, 200
+                
+        except Exception as e:
+            logger.error(f"Error during duplicate datetime cleanup: {str(e)}")
+            return {"error": f"Cleanup failed: {str(e)}"}, 500
+
+@historicstock_ns.route('/cleanup_duplicates/<string:stock_key>')
+class CleanupDuplicatesByStockResource(Resource):
+    @jwt_required()
+    @admin_required
+    @historicstock_ns.response(200, 'Success')
+    @historicstock_ns.response(404, 'Stock not found')
+    @historicstock_ns.response(500, 'Server error')
+    def post(self, stock_key):
+        try:
+            stock_key = stock_key.upper()
+            logger.info(f"Initiating duplicate datetime cleanup for stock: {stock_key}")
+            
+            # Check if stock exists
+            stock_exists = HistoricStock.query.filter_by(stock_key=stock_key).first() is not None
+            if not stock_exists:
+                return {"error": f"Stock {stock_key} not found in historical data"}, 404
+            
+            result = cleanup_duplicate_datetimes_for_stock(stock_key)
+            
+            return {
+                "message": f"Duplicate datetime cleanup completed for {stock_key}",
+                "details": result
+            }, 200
+            
+        except Exception as e:
+            logger.error(f"Error cleaning up duplicates for {stock_key}: {str(e)}")
+            return {"error": f"Cleanup failed: {str(e)}"}, 500

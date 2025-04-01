@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_restx import Api
+from flask_restx import Api, Resource
 from backend.models import User
 from backend.models import AuthenticationUser
 from backend.models.usertype import UserType
@@ -13,6 +13,7 @@ from backend.models.pricealert import PriceAlert
 from backend.exts import db
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
+from flask_cors import CORS
 from datetime import datetime, timedelta
 from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -30,10 +31,18 @@ from backend.routes.authorization import auth_ns
 
 api = Api(version='1.0', title='Finance App API', description='API for Finance App')
 
+hello_ns = api.namespace('api', description='Hello World API')
+
+@hello_ns.route('/helloworld')
+class HelloWorld(Resource):
+    def get(self):
+        return {'message': 'Hello, World!'}
+
 def create_app(config):
     app = Flask(__name__)
     bcrypt = Bcrypt(app)
     app.config.from_object(config)
+    CORS(app)
     db.init_app(app)
 
     migrate = Migrate(app, db)
@@ -51,6 +60,7 @@ def create_app(config):
     api.add_namespace(watchlist_ns)
     api.add_namespace(trade_history_ns)
     api.add_namespace(pricealert_ns)
+    api.add_namespace(hello_ns)
         
     @app.shell_context_processor
     def make_shell_context():

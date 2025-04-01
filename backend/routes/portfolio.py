@@ -140,10 +140,14 @@ class UnrealizedGainsResource(Resource):
     def get(self, user_id):
         """Calculate unrealized gains for a user"""
         try:
-            gains = calculate_unrealized_gains(user_id)
-            return gains, 200
+            unrealized_gains = calculate_unrealized_gains(user_id)
+            return {
+                "user_id": user_id,
+                "total_unrealized_gains": unrealized_gains["total_unrealized_gains"],
+                "percentage_change": unrealized_gains["percentage_change"]
+            }, 200
         except Exception as e:
-            portfolio_ns.abort(404, str(e))
+            return {"message": str(e)}, 500
 
 @portfolio_ns.route('/networth/<int:portfolio_user_id>')
 class NetworthResource(Resource):

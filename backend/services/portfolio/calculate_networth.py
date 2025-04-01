@@ -15,6 +15,7 @@ def calculate_networth(portfolio_user_id):
     if not portfolio_user:
         raise ValueError(f"Portfolio user with ID {portfolio_user_id} not found.")
     
+    # Calculate the total value of investments only
     total_assets = 0.0
 
     for investment in portfolio_user.investments:
@@ -25,9 +26,11 @@ def calculate_networth(portfolio_user_id):
             investment_value = investment.quantity * current_stock_price
             total_assets += investment_value
 
+    # Update the total_assets (value of investments only) 
     portfolio_user.total_assets = total_assets
     portfolio_user.save()
 
+    #Calculate the networth as balance + total_assets
     networth = portfolio_user.balance + total_assets
     
     portfolio_user.networth = networth

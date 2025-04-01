@@ -30,7 +30,7 @@ def svm_predictor(key):
         print(f"Data not found: {e}")
         return
 
-    #Grab all training and testing data necessary, with the model, scaler, and original dataframe
+    # Grab all training and testing data necessary, with the model, scaler, and original dataframe
 
     svm_x_test_normalized = variables.get('svm_x_test_normalized')
     svm_y_test = variables.get('svm_y_test')
@@ -38,23 +38,23 @@ def svm_predictor(key):
     svr_model = variables.get('svr_model')
     svm_df = variables.get('processed_df')
 
-    predictions = svr_model.predict(svm_x_test_normalized) #Predict off of the test set for next value
-    mse = mean_squared_error(svm_y_test, predictions) #Get mse
+    predictions = svr_model.predict(svm_x_test_normalized) # Predict off of the test set for next value
+    mse = mean_squared_error(svm_y_test, predictions) # Get mse
 
     print(predictions)
     print("Mean Squared Error:", mse)
 
-    rmse = np.sqrt(mse) #Calculate for root mse
+    rmse = np.sqrt(mse) # Calculate for root mse
     print(f"Root Mean Squared Error (RMSE): {rmse}")
 
     last_row = svm_df[['Exponential Moving Average',
         'Relative Strength Index', 'Moving Standard Deviation',
         'Upper Band', 'Lower Band', 'Williams R%', '%K Fast', '%D Slow',
-        'Price Rate of Change', 'adx', 'Variation']].iloc[-1].to_frame().T #Ensure the last row from the newest df has all features needed
+        'Price Rate of Change', 'adx', 'Variation']].iloc[-1].to_frame().T # Ensure the last row from the newest df has all features needed
 
-    last_row_scaled = scaler.transform(last_row) #Grab and transform the last row
+    last_row_scaled = scaler.transform(last_row) # Grab and transform the last row
 
-    next_price_prediction = svr_model.predict(last_row_scaled) #Use the model to predict the last row
+    next_price_prediction = svr_model.predict(last_row_scaled) # Use the model to predict the last row
 
     print(f"Predicted Next Stock Price: {next_price_prediction[0]}")
 
@@ -90,30 +90,30 @@ def lstm_predictor(key):
     lstm_scaler = variables.get('lstm_scaler')
     lstm_model = variables.get('lstm_model')
 
-    predictions = lstm_model.predict(lstm_test_X) #Tie predictions from the test set into the loaded model
+    predictions = lstm_model.predict(lstm_test_X) # Tie predictions from the test set into the loaded model.
 
-    prediction_copies_array = np.repeat(predictions, lstm_test_X.shape[2], axis=-1) #Copy the predictions, with 3 features per time step
-    pred = lstm_scaler.inverse_transform(np.reshape(prediction_copies_array, (len(predictions), lstm_test_X.shape[2])))[:, 0] #Turn away from the scale by inverse transsformation
-    #Each feature is duplicated to ensure the inverse transformation can be correctly applied, as is below
+    prediction_copies_array = np.repeat(predictions, lstm_test_X.shape[2], axis=-1) # Copy the predictions, with 3 features per time step
+    pred = lstm_scaler.inverse_transform(np.reshape(prediction_copies_array, (len(predictions), lstm_test_X.shape[2])))[:, 0] # Turn away from the scale by inverse transsformation
+    # Each feature is duplicated to ensure the inverse transformation can be correctly applied, as is below
 
     original_copies_array = np.repeat(lstm_test_y, lstm_test_X.shape[2], axis=-1)
     original = lstm_scaler.inverse_transform(np.reshape(original_copies_array, (len(lstm_test_y), lstm_test_X.shape[2])))[:, 0] #Do the same for the original
 
-    print("Predicted Values: ", pred) #Print both to check, not needed
+    print("Predicted Values: ", pred) # Print both to check, not needed
     print("Original Values: ", original)
 
-    prediction_copies_array = np.repeat(predictions, lstm_test_X.shape[2], axis=1) #Predictions and its test shape are repeated to match the number of time steps, and number of features
+    prediction_copies_array = np.repeat(predictions, lstm_test_X.shape[2], axis=1) # Predictions and its test shape are repeated to match the number of time steps, and number of features
 
-    predicted_price_original_scale = lstm_scaler.inverse_transform(prediction_copies_array)[:, 0] #Transforms the array back to its original scale
+    predicted_price_original_scale = lstm_scaler.inverse_transform(prediction_copies_array)[:, 0] # Transforms the array back to its original scale.
 
     print(f"Last input time step: {original[-1]}")
-    print(f"Predicted next price (original scale): {predicted_price_original_scale[0]}") #Print the redicted next price
+    print(f"Predicted next price (original scale): {predicted_price_original_scale[0]}") # Print the redicted next price.
 
     mse = mean_squared_error(original, pred)
-    rmse = np.sqrt(mse) #calculate mse and rmse
+    rmse = np.sqrt(mse) # Calculate mse and rmse.
 
     print(f"Mean Squared Error (MSE): {mse}")
-    print(f"Root Mean Squared Error (RMSE): {rmse}") #Print
+    print(f"Root Mean Squared Error (RMSE): {rmse}")
 
     variables = {
             'lstm_predictions': (pred, PREDICTION_STORAGE, f'lstm_predictions_{key}.npy'),
@@ -123,4 +123,4 @@ def lstm_predictor(key):
             'mse': (mse, PREDICTION_STORAGE, f'lstm_mse_{key}.npy')
         }
 
-    variables = save_variables_to_s3(variables) #Upload all results
+    variables = save_variables_to_s3(variables)

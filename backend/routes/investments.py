@@ -47,7 +47,7 @@ class InvestmentResource(Resource):
             investment_id=data.get("investment_id"),
             user_id=data.get("user_id"),
             portfolio_user_id=data.get("portfolio_user_id"),
-            stock_key=data.get("stock_key"),
+            stock_key=data.get("stock_key").upper(),
             quantity=data.get("quantity"),
             purchase_price=data.get("purchase_price"),
             purchase_date=purchase_date_obj,
@@ -77,6 +77,8 @@ class InvestmentResourceById(Resource):
         data["purchase_date"] = datetime_obj
         last_date_obj = parser.parse(data.get("last_update"))
         data["last_update"] = last_date_obj
+        if "stock_key" in data:
+            data["stock_key"] = data["stock_key"].upper()
         update_investment.update(**data)
         return update_investment
     
@@ -88,3 +90,34 @@ class InvestmentResourceById(Resource):
         delete_investment = Investment.query.get_or_404(id)
         delete_investment.delete()
         return delete_investment
+
+@investment_ns.route('/user/<int:user_id>')
+class InvestmentResourceByUser(Resource):
+    @jwt_required()
+    @investment_ns.marshal_list_with(investment_model)
+    def get(self, user_id):
+        """Get all investments for a specific user"""
+        investments = Investment.query.filter_by(user_id=user_id).all()
+        return investments
+
+@investment_ns.route('/stock/<string:stock_key>')
+class InvestmentResourceByStock(Resource):
+    @jwt_required()
+    @investment_ns.marshal_list_with(investment_model)
+    def get(self, stock_key):
+        """Get all investments for a specific stock"""
+        uppercase_stock_key = stock_key.upper()
+        investments = Investment.query.filter_by(stock_key=uppercase_stock_key).all()
+        return investments
+
+@investment_ns.route('/user/<int:user_id>/stock/<string:stock_key>')
+class InvestmentResourceByUserAndStock(Resource):
+    @jwt_required()
+    @investment_ns.marshal_with(investment_model)
+    def get(self, user_id, stock_key):
+        """Get user's investment in a specific stock"""
+        uppercase_stock_key = stock_key.upper()
+        investment = Investment.query.filter_by(user_id=user_id, stock_key=uppercase_stock_key).first_or_404(
+            description=f"No investment found for user {user_id} and stock {uppercase_stock_key}"
+        )
+        return investment

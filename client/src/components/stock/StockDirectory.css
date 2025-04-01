@@ -1,0 +1,198 @@
+.stock-directory-page {
+  padding-bottom: 40px;
+  padding-top: 1rem;
+}
+
+.stock-directory-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  margin-top: 0.5rem;
+  color: #333;
+}
+
+.stock-directory-subtitle {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Search and filters */
+.search-container {
+  width: 100%;
+}
+
+.search-input-wrapper,
+.filter-input-wrapper,
+.sort-input-wrapper {
+  position: relative;
+}
+
+.search-icon,
+.filter-icon,
+.sort-icon {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  color: #6c757d;
+  z-index: 1;
+}
+
+.search-input-wrapper .form-control {
+  padding-left: 40px;
+  height: 46px;
+  border-radius: 8px;
+}
+
+.filter-input-wrapper .form-select,
+.sort-input-wrapper .form-select {
+  padding-left: 40px;
+  height: 46px;
+  border-radius: 8px;
+}
+
+.results-count {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 46px;
+  font-size: 16px;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* Stock cards */
+.stock-card {
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 100%;
+  background-color: #fff;
+}
+
+.stock-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+.stock-title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.stock-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #2d3748;
+}
+
+.stock-key {
+  display: inline-block;
+  font-size: 14px;
+  color: #718096;
+  margin-right: 8px;
+}
+
+.sector-badge {
+  display: inline-block;
+  background-color: #e2e8f0;
+  color: #4a5568;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-top: 6px;
+}
+
+.stock-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.change-percent {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.change-percent.positive {
+  color: #38a169;
+}
+
+.change-percent.negative {
+  color: #e53e3e;
+}
+
+.stock-card-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Trade history section */
+.trade-history-section {
+  margin-top: 60px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+}
+
+.trade-history-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.trade-history-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.trade-history-table th {
+  text-align: left;
+  padding: 12px 16px;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #e2e8f0;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.trade-history-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #2d3748;
+}
+
+.trade-history-table tr:last-child td {
+  border-bottom: none;
+}
+
+.trade-history-table a {
+  color: #3182ce;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.trade-history-table a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .stock-directory-title {
+    font-size: 28px;
+  }
+  
+  .section-title {
+    font-size: 22px;
+  }
+  
+  .trade-history-table {
+    font-size: 14px;
+  }
+} 

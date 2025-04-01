@@ -1,0 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Pet Sounds color palette */
+  --pet-sounds-green: #4a7a4a;      /* Main green background */
+  --pet-sounds-yellow: #f0e68c;     /* Yellow text color */
+  --pet-sounds-white: #ffffff;      /* White text color */
+  --pet-sounds-brown: #8b4513;      /* Brown from animals */
+  --pet-sounds-tan: #d2b48c;        /* Tan/sand color */
+  --pet-sounds-light-blue: #add8e6; /* Light blue from clothing */
+  --pet-sounds-dark-green: #355e35; /* Darker green for hover states */
+  --pet-sounds-light-tan: #e8d9b0;  /* Lighter tan for backgrounds */
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--pet-sounds-light-tan);
+  color: var(--pet-sounds-brown);
+}
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Override bootstrap container for our login and signup pages */
+.login-container,
+.signup-container {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+}
+
+/* Hide navbar on login and signup pages */
+.login-container .navbar,
+.signup-container .navbar {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--pet-sounds-green);
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--pet-sounds-dark-green);
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0;
+  }
+} 

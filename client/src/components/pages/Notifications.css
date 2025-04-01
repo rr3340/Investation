@@ -1,0 +1,123 @@
+.notifications-container {
+  margin-bottom: 5rem;
+}
+
+.notifications-heading {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.notification-icon {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+  color: var(--accent-color);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--accent-color);
+}
+
+.alert-card {
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.alert-card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.alert-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #cfcfcf;
+  background-color: #f8f8f8;
+  color: #000000;
+  border: none;
+}
+
+.alert-card.triggered .card-header {
+  background-color: #f8f8f8;
+  border-left: 4px solid #ffc107;
+  color: #343a40;
+}
+
+.alert-card h4 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0;
+  color: #000000;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.stock-link {
+  color: #5B7065;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.stock-link:hover {
+  color: #E2C290;
+  text-decoration: underline;
+}
+
+.list-group-item {
+  padding: 1rem;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #cfcfcf;
+  transition: background-color 0.2s ease;
+  color: #212529;
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}
+
+.list-group-item:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.notification-card {
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .notifications-container {
+    padding: 0 1rem;
+  }
+  
+  .notifications-heading {
+    font-size: 1.5rem;
+  }
+  
+  .list-group-item {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  
+  .list-group-item button {
+    margin-top: 1rem;
+    align-self: flex-end;
+  }
+} 

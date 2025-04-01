@@ -1,0 +1,128 @@
+.search-suggestions-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1050;
+  margin-top: 3px;
+  max-height: 350px;
+  overflow-y: auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  background-color: white;
+}
+
+.search-suggestions-list {
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.search-suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-suggestion-item:hover {
+  background-color: #f8f9fa;
+}
+
+.suggestion-symbol {
+  font-weight: bold;
+  margin-right: 10px;
+  color: #5B7065; /* Dark green from Pet Sounds */
+}
+
+.suggestion-name {
+  color: #6c757d;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-suggestions-loading {
+  text-align: center;
+  padding: 1rem;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Category Headers */
+.suggestion-category {
+  background-color: #f4f4f4;
+  font-weight: bold;
+  color: #444;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.category-icon {
+  margin-right: 8px;
+  font-size: 0.9rem;
+}
+
+/* User suggestion styling */
+.user-suggestion {
+  padding: 0.5rem 1rem;
+}
+
+.suggestion-profile-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+}
+
+.suggestion-profile-placeholder {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #5B7065;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 12px;
+}
+
+.suggestion-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.suggestion-display-name {
+  font-weight: bold;
+  color: #212529;
+}
+
+.suggestion-username {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+/* Stock suggestion styling */
+.stock-suggestion .suggestion-symbol {
+  color: #E2C290; /* Gold from Pet Sounds */
+  background-color: rgba(226, 194, 144, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .search-suggestions-container {
+    position: fixed;
+    top: 60px; /* Adjust based on navbar height */
+    left: 10px;
+    right: 10px;
+    max-height: 50vh;
+  }
+} 

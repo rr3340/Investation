@@ -1,0 +1,62 @@
+/* App Styles */
+:root {
+  --pet-sounds-green: #5B7065;
+  --pet-sounds-brown: #8F5C38;
+  --pet-sounds-beige: #ffc653;
+  --pet-sounds-red: #D64933;
+  --pet-sounds-light: #F9F9F9;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--pet-sounds-light);
+  color: #333;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-container {
+  flex: 1;
+  margin-top: 56px; /* Height of the fixed navbar */
+  padding-bottom: 2rem;
+}
+
+/* Utility Classes */
+.text-pet-sounds-green {
+  color: var(--pet-sounds-green);
+}
+
+.text-pet-sounds-brown {
+  color: var(--pet-sounds-brown);
+}
+
+.text-pet-sounds-red {
+  color: var(--pet-sounds-red);
+}
+
+.bg-pet-sounds-green {
+  background-color: var(--pet-sounds-green);
+}
+
+.bg-pet-sounds-brown {
+  background-color: var(--pet-sounds-brown);
+}
+
+.bg-pet-sounds-beige {
+  background-color: var(--pet-sounds-beige);
+}
+
+.bg-pet-sounds-red {
+  background-color: var(--pet-sounds-red);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .content-container {
+    padding-bottom: 1rem;
+  }
+} 
