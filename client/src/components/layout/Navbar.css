@@ -1,0 +1,101 @@
+.main-navbar {
+  background-color: var(--pet-sounds-green) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--pet-sounds-light) !important;
+  letter-spacing: 0.5px;
+}
+
+.nav-link {
+  color: var(--pet-sounds-light) !important;
+  padding: 0.5rem 1rem !important;
+  margin: 0 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.nav-link.active {
+  color: var(--pet-sounds-beige) !important;
+  font-weight: 600;
+  position: relative;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 3px;
+  background-color: var(--pet-sounds-beige);
+  border-radius: 3px;
+}
+
+/* Custom hover effect */
+.nav-link:hover {
+  color: var(--pet-sounds-beige) !important;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+/* Dropdown styling */
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Dropdown active state */
+.dropdown-item.active, 
+.dropdown-item:active {
+  background-color: var(--pet-sounds-green);
+  color: var(--pet-sounds-light);
+}
+
+.dropdown-item:hover {
+  background-color: var(--pet-sounds-beige);
+  color: var(--pet-sounds-brown);
+}
+
+/* Button styling */
+.signup-button, .logout-button {
+  background-color: transparent !important;
+  border-color: var(--pet-sounds-beige) !important;
+  color: var(--pet-sounds-beige) !important;
+  border-radius: 20px !important;
+  padding: 0.375rem 1.5rem !important;
+  transition: all 0.2s ease;
+}
+
+.signup-button:hover, .logout-button:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: var(--pet-sounds-light) !important;
+  color: var(--pet-sounds-light) !important;
+}
+
+.logout-link {
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .nav-link {
+    padding: 0.75rem 1rem !important;
+  }
+  
+  .nav-link.active::after {
+    left: 15px;
+    transform: none;
+    width: 20px;
+  }
+  
+  .signup-button, .logout-button {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+} 

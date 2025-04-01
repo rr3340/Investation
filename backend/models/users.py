@@ -7,14 +7,17 @@ class User(db.Model):
     
     id = db.Column(db.Integer(), primary_key=True)
     username = db.Column(db.String(15), nullable=False, unique=True, index=True)
+    display_name = db.Column(db.String(50), nullable=True)
     first_name = db.Column(db.String(80), nullable=False)
     last_name = db.Column(db.String(80), nullable=False)
     gender = db.Column(db.String(10), nullable=False)
-    age = db.Column(db.Integer(), nullable=False)
+    birth_date = db.Column(db.Date(), nullable=False)
+    mobile_phone = db.Column(db.String(20), nullable=True)
     about = db.Column(db.String(150), nullable=True)
     nationality = db.Column(db.String(80), nullable=True)
     email = db.Column(db.String(80), nullable=False, unique=True, index=True)
     profile_img = db.Column(db.String(255), nullable=True)
+    profile_banner = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime(), nullable=False, default=db.func.now())
     last_login = db.Column(db.DateTime(), nullable=True)
     

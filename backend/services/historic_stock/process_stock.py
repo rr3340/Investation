@@ -1,4 +1,5 @@
 import pandas as pd
+import pytz
 
 def process_from_database(df):
     normal_window = 9  #Fast
@@ -9,11 +10,17 @@ def process_from_database(df):
         print(f"Error: Missing one or more required columns: {necessary_columns}")
         return None
 
+    # Ensure index is datetime with UTC timezone
+    df.index = pd.to_datetime(df.index, errors='coerce')
+    # Explicitly preserve timezone information by localizing to UTC if naive
+    df.index = df.index.map(lambda x: x.tz_localize(pytz.UTC) if x.tzinfo is None else x.astimezone(pytz.UTC))
+    
+    # Extract date components while preserving the timezone-aware index
+    df['date'] = df.index.day  # Per day split so the first 5 will be of NA
+
     #Nma + Ema calculations
     def ma_calculations(df, window_size=5):
-        df.index = pd.to_datetime(df.index, errors='coerce')
-        df['date'] = df.index.day #Per day split so the first 5 will be of NA
-
+        # No need to convert index again, as we already did it above
         def calculate_nma_roll(set):
             set['Normal Moving Average'] = set['close'].rolling(window=window_size).mean() #calculate rolling set per window size
             return set

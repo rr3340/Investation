@@ -1,0 +1,216 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--pet-sounds-light);
+    font-family: Helvetica, Arial, sans-serif;
+    padding: 20px;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.login-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 980px;
+    margin: 20px auto 0;
+}
+
+.login-left {
+    max-width: 500px;
+    padding-right: 32px;
+}
+
+.tagline {
+    font-size: 28px;
+    font-weight: normal;
+    line-height: 32px;
+    width: 500px;
+    color: var(--pet-sounds-brown);
+}
+
+.login-form-container {
+    background-color: var(--pet-sounds-white);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 396px;
+    border: 2px solid var(--pet-sounds-green);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: 14px 16px;
+    font-size: 17px;
+    border-radius: 6px;
+    border: 1px solid var(--pet-sounds-tan);
+    margin-bottom: 12px;
+    background-color: var(--pet-sounds-white);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--pet-sounds-green);
+    box-shadow: 0 0 0 2px rgba(74, 122, 74, 0.2);
+}
+
+.login-button {
+    background-color: var(--pet-sounds-green);
+    border: none;
+    border-radius: 6px;
+    color: var(--pet-sounds-white);
+    font-size: 20px;
+    font-weight: bold;
+    padding: 12px;
+    margin: 16px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: var(--pet-sounds-dark-green);
+}
+
+.forgot-password {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.forgot-password a {
+    color: var(--pet-sounds-green);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+    color: var(--pet-sounds-dark-green);
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: var(--pet-sounds-tan);
+    margin: 20px 0;
+}
+
+.create-account {
+    display: flex;
+    justify-content: center;
+    margin: 6px 0;
+}
+
+.create-account-button {
+    background-color: var(--pet-sounds-brown);
+    border: none;
+    border-radius: 6px;
+    color: var(--pet-sounds-white);
+    font-size: 17px;
+    font-weight: bold;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.create-account-button:hover {
+    background-color: #6b3510;
+}
+
+.create-page {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 14px;
+}
+
+.create-page a {
+    color: #1c1e21;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.create-page a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+    .login-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .login-left {
+        margin-bottom: 40px;
+        padding-right: 0;
+    }
+    
+    .tagline {
+        width: 100%;
+        font-size: 24px;
+    }
+    
+    .login-form-container {
+        width: 100%;
+        max-width: 396px;
+    }
+}
+
+.error-message {
+    color: #e41e3f;
+    font-size: 13px;
+    margin: 3px 0 10px;
+    text-align: left;
+}
+
+.server-error {
+    background-color: #ffebee;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-left: 4px solid #e41e3f;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Password container and show password styles */
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.show-password-container {
+    display: flex;
+    align-items: center;
+    margin: 5px 0 15px;
+}
+
+.show-password-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #65676b;
+}
+
+.show-password-label input[type="checkbox"] {
+    margin-right: 8px;
+    margin-bottom: 0;
+    width: 16px;
+    height: 16px;
+}
+
+.show-password-label span {
+    font-size: 14px;
+} 

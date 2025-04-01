@@ -35,17 +35,17 @@ def retrain_svm_model(key):
         svr_model = model.get('svr_model')
     except RuntimeError as e:
         print(f"Model not found, creating a new one: {e}")
-        svr_model = build_svm_model()  #If SVM model isn't present, create a new one
+        svr_model = build_svm_model()  # If SVM model isn't present, create a new one
     
     print(svm_x_train_normalized, svm_y_train)
 
-    svr_model.fit(svm_x_train_normalized, svm_y_train) #Fit training data into model, retrain
+    svr_model.fit(svm_x_train_normalized, svm_y_train) # Fit training data into model, retrain
 
     variables = {
         'svr_model': (svr_model, MODEL_STORAGE, f'svr_model_{key}.pkl')
     }
 
-    variables = save_variables_to_s3(variables) #Upload retrained model
+    variables = save_variables_to_s3(variables) # Upload retrained model
 
 def retrain_lstm_model(key):
     
@@ -56,7 +56,7 @@ def retrain_lstm_model(key):
         'lstm_test_y': (PROCESSED_STORAGE, f'lstm_test_y_{key}.npy')
     }
 
-    df = load_variables_from_s3(scaler_variables) #same as above
+    df = load_variables_from_s3(scaler_variables) # same as above
 
     lstm_train_X = df.get('lstm_train_X')
     lstm_test_X = df.get('lstm_test_X')
@@ -72,7 +72,7 @@ def retrain_lstm_model(key):
         lstm_model = lstm_model.get('lstm_model')
     except RuntimeError as e:
         print(f"Model not found, creating a new one: {e}")
-        lstm_model = build_lstm_model() #If there is no LSTM model, create a new one
+        lstm_model = build_lstm_model() # If there is no LSTM model, create a new one
 
 
     history = lstm_model.fit(
@@ -84,22 +84,22 @@ def retrain_lstm_model(key):
         verbose=1
     )
 
-    final_model = lstm_model #With all values as above, grab the necessary data and retrain the model
+    final_model = lstm_model # With all values as above, grab the necessary data and retrain the model
 
     variables = {
         'lstm_model': (final_model, MODEL_STORAGE, f'lstm_model_{key}.keras')
     }
 
-    variables = save_variables_to_s3(variables) #Upload retrained model
+    variables = save_variables_to_s3(variables) # Upload retrained model
 
 def build_lstm_model():
     model = Sequential()
-    model.add(LSTM(50, return_sequences=True, input_shape=(12, 15)))  #Adjust input shape to data
+    model.add(LSTM(50, return_sequences=True, input_shape=(12, 15)))  # Adjust input shape to data
     model.add(LSTM(50))
     model.add(Dropout(0.35))
-    model.add(Dense(1))  #Predicting next closing price
+    model.add(Dense(1))  # Predicting next closing price
     
-    #Compile model with adam
+    # Compile model with adam
     model.compile(loss='mse', optimizer='adam')
     return model
 

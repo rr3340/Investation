@@ -1,0 +1,154 @@
+.auth-navbar {
+    background-color: #5B7065; /* Dark green from Pet Sounds */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 1rem;
+}
+
+.brand {
+    color: #F9F9F9 !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+.search-container {
+    position: relative;
+    flex-grow: 0.3;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.search-form {
+    width: 100%;
+}
+
+.search-input {
+    border-radius: 20px 0 0 20px !important;
+    border: none !important;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.search-input:focus {
+    box-shadow: none !important;
+    background-color: white !important;
+}
+
+.search-button {
+    border-radius: 0 20px 20px 0 !important;
+    border: none !important;
+    background-color: #E2C290 !important; /* Gold from Pet Sounds */
+    color: #5B7065 !important;
+    height: 48px !important;    /* Add this to control input height */
+    font-size: 1rem !important; /* Add this to control text size */
+}
+
+.search-button:hover {
+    background-color: #D4AF37 !important; /* Darker gold on hover */
+}
+
+.search-error {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    margin-top: 5px;
+    z-index: 1000;
+    font-size: 0.875rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+    max-width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-icon {
+    margin-right: 6px;
+    font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -10px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+.nav-icon-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #F9F9F9 !important;
+    padding: 0.5rem 1rem !important;
+    margin: 0 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.nav-icon-link:hover {
+    color: #E2C290 !important; /* Gold from Pet Sounds */
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.nav-icon {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+.nav-text {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Active link styling */
+.nav-icon-link.active {
+    color: #E2C290 !important; /* Gold from Pet Sounds */
+    position: relative;
+}
+
+.nav-icon-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 3px;
+    background-color: #E2C290; /* Gold from Pet Sounds */
+    border-radius: 3px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .search-container,
+    .search-form {
+        margin: 0.5rem 0;
+        max-width: 100%;
+        flex-grow: 1;
+        width: 100%;
+    }
+    
+    .nav-icon-link {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 0.75rem 1rem !important;
+    }
+    
+    .nav-icon {
+        margin-bottom: 0;
+        margin-right: 0.75rem;
+    }
+    
+    .nav-text {
+        font-size: 0.9rem;
+    }
+} 

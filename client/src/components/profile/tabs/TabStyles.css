@@ -1,0 +1,1475 @@
+/* Tab Styles - Pet Sounds Aesthetic */
+.portfolio-tab,
+.investments-tab,
+.watchlist-tab,
+.analytics-tab,
+.settings-tab {
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Tab Title Styles */
+.tab-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin: 1.5rem 0 1rem;
+  color: #34495e;
+}
+
+/* Metric Cards */
+.metric-cards {
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.metric-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.metric-card .card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+  color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.1);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metric-content {
+  flex: 1;
+}
+
+.metric-title {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #7f8c8d;
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: #2c3e50;
+}
+
+.metric-change {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.metric-change.positive {
+  color: #27ae60;
+}
+
+.metric-change.negative {
+  color: #e74c3c;
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  color: #95a5a6;
+}
+
+/* Placeholder styles for charts */
+.allocation-placeholder,
+.performance-placeholder {
+  background-color: #ecf0f1;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #7f8c8d;
+}
+
+.placeholder-note {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: #95a5a6;
+}
+
+/* Investments Tab Styles */
+.investments-tab {
+  padding: 20px 0;
+}
+
+.tab-title {
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.investments-controls {
+  margin-bottom: 20px;
+}
+
+.investments-table {
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+
+.investments-table table {
+  min-width: 800px;
+}
+
+.investments-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.investments-table th.sortable:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.investments-table td.positive {
+  color: #28a745;
+  font-weight: 500;
+}
+
+.investments-table td.negative {
+  color: #dc3545;
+  font-weight: 500;
+}
+
+.investments-summary {
+  background-color: #f8f9fa;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+/* Add styling for stock name in investment table */
+.investment-table .stock-name {
+  font-weight: normal; /* Override the bold styling */
+}
+
+/* More specific selector for stock name */
+.portfolio-tab .investment-table tbody tr td .stock-name {
+  font-weight: normal !important; /* Force override with !important */
+  font-size: inherit; /* Maintain the same font size */
+}
+
+.investments-summary p {
+  margin-bottom: 8px;
+}
+
+.investments-summary p:last-child {
+  margin-bottom: 0;
+}
+
+/* Daily Performance row styling */
+.daily-performance-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.performance-label {
+  text-align: right;
+}
+
+.performance-label .badge {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+.performance-symbol {
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.performance-value {
+  text-align: left;
+  font-weight: 500;
+}
+
+.no-investments {
+  margin-top: 30px;
+}
+
+.no-investments .card {
+  border: 1px dashed #dee2e6;
+  background-color: #f8f9fa;
+}
+
+/* Watchlist Styles */
+.watchlist-controls {
+  margin-bottom: 1.5rem;
+}
+
+.watchlist-grid {
+  margin-top: 1rem;
+}
+
+.watchlist-card {
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.watchlist-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.watchlist-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.watchlist-item-symbol {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: #2c3e50;
+}
+
+.watchlist-item-name {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin-bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+/* Watchlist Card Price */
+.watchlist-card-price {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
+}
+
+.watchlist-card-price h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  color: #2c3e50;
+}
+
+/* Watchlist item change styles - updated to match StockCard.css */
+.watchlist-item-change {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  max-width: fit-content;
+}
+
+.watchlist-item-change.positive {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: #28a745;
+}
+
+.watchlist-item-change.negative {
+  background-color: rgba(235, 59, 90, 0.1);
+  color: #dc3545;
+}
+
+.watchlist-item-change svg {
+  font-size: 0.8rem;
+  margin-right: 0.25rem;
+}
+
+.watchlist-card-price h4 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.watchlist-card-chart {
+  height: 80px;
+  margin-bottom: 1rem;
+}
+
+.chart-placeholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f7fa;
+  border-radius: 8px;
+}
+
+.chart-placeholder svg {
+  font-size: 2rem;
+}
+
+.chart-placeholder .positive {
+  color: #27ae60;
+}
+
+.chart-placeholder .negative {
+  color: #e74c3c;
+}
+
+.watchlist-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.watchlist-item-sector {
+  font-size: 0.8rem;
+  color: #7f8c8d;
+  background-color: #ecf0f1;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.watchlist-actions {
+  display: flex;
+  align-items: center;
+}
+
+.no-watchlist,
+.no-results {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  color: #7f8c8d;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  color: #e74c3c;
+  margin-bottom: 1.5rem;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  color: #2c3e50;
+}
+
+.empty-state p {
+  margin-bottom: 1.5rem;
+  max-width: 400px;
+}
+
+/* Analytics Tab Styles */
+.time-range-selector {
+  background-color: #f5f7fa;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.time-range-select {
+  max-width: 150px;
+  border-radius: 4px;
+  border: 1px solid #dce1e8;
+  background-color: #fff;
+}
+
+.performance-metrics .metric-value.excellent {
+  color: #16a085;
+}
+
+.performance-metrics .metric-value.positive {
+  color: #27ae60;
+}
+
+.performance-metrics .metric-value.negative {
+  color: #e74c3c;
+}
+
+.performance-metrics .metric-value.poor {
+  color: #c0392b;
+}
+
+.chart-card {
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.chart-card .card-header {
+  background-color: #f5f7fa;
+  border-bottom: 1px solid #e6e9ed;
+  padding: 0.75rem 1rem;
+}
+
+.chart-card .card-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #34495e;
+}
+
+.chart-card .card-body {
+  padding: 1rem;
+}
+
+.chart-placeholder.large {
+  min-height: 300px;
+}
+
+.insights-placeholder {
+  background-color: #ecf0f1;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #7f8c8d;
+}
+
+/* Settings Tab Styles */
+.settings-sidebar {
+  background-color: #f5f7fa;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.settings-nav-item {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.settings-nav-item:hover {
+  background-color: #eef2f7;
+}
+
+.settings-nav-item.active {
+  background-color: #e74c3c;
+  color: white;
+  border-left-color: #c0392b;
+}
+
+.settings-nav-icon {
+  margin-right: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.settings-content {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  height: 100%;
+}
+
+.settings-content .card-body {
+  padding: 1.5rem;
+}
+
+.settings-tab .form-label {
+  font-weight: 500;
+  color: #34495e;
+}
+
+.settings-tab .form-control,
+.settings-tab .form-select {
+  border-radius: 4px;
+  border: 1px solid #dce1e8;
+  padding: 0.5rem 0.75rem;
+}
+
+.settings-tab .form-control:focus,
+.settings-tab .form-select:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 0.25rem rgba(231, 76, 60, 0.25);
+}
+
+.settings-tab .form-check {
+  margin-bottom: 0rem;
+  padding-left: 3rem;  /* Increase left padding for more space */
+  position: relative;
+}
+
+/* Add spacing between checkbox and label */
+.settings-tab .form-check-input {
+  margin-right: 3rem;
+  position: absolute;
+  left: 1;
+}
+
+/* Add more space after the checkbox label and before the description */
+.settings-tab .form-text {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin-top: 0.25rem;
+  margin-left: 0.25rem;
+  display: block;
+}
+
+/* Style the checkbox label to move it right and down */
+.settings-tab .form-check-label {
+  position: relative;
+  left: .5rem;     /* Move slightly right */
+  top: 0.25rem;     /* Move slightly down */
+  padding-left: 0.25rem;
+  display: inline-block;
+}
+
+.settings-tab .btn-primary {
+  background-color: #e74c3c;
+  border-color: #e74c3c;
+}
+
+.settings-tab .btn-primary:hover,
+.settings-tab .btn-primary:focus {
+  background-color: #c0392b;
+  border-color: #c0392b;
+}
+
+.settings-section {
+  margin-bottom: 2rem;
+}
+
+.settings-section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.form-actions button {
+  min-width: 100px;
+}
+
+.form-actions button:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.settings-alert {
+  margin-bottom: 1.5rem;
+}
+
+/* Transactions Tab Styles */
+.transactions-tab {
+  padding: 1rem 0;
+}
+
+.transaction-filters {
+  margin-bottom: 1.5rem;
+}
+
+.transaction-item {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  background-color: #f8f9fa;
+  border-left: 4px solid #6c757d;
+}
+
+.transaction-item.deposit {
+  border-left-color: #28a745;
+}
+
+.transaction-item.withdrawal {
+  border-left-color: #dc3545;
+}
+
+.transaction-item.transfer {
+  border-left-color: #007bff;
+}
+
+.transaction-item.investment {
+  border-left-color: #6610f2;
+}
+
+.transaction-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.transaction-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.transaction-amount {
+  font-weight: 600;
+}
+
+.transaction-amount.positive {
+  color: #28a745;
+}
+
+.transaction-amount.negative {
+  color: #dc3545;
+}
+
+.transaction-details {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.transaction-date {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.no-transactions {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.no-transactions p {
+  margin-bottom: 1.5rem;
+  color: #6c757d;
+  font-size: 1.1rem;
+}
+
+/* Activity Tab Styles */
+.activity-tab {
+  padding: 1rem 0;
+}
+
+.activity-filters {
+  margin-bottom: 1.5rem;
+}
+
+.activity-timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.activity-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 8px;
+  width: 2px;
+  background-color: #dee2e6;
+}
+
+.activity-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.activity-item::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 0.25rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #007bff;
+  border: 2px solid #fff;
+  z-index: 1;
+}
+
+.activity-item.login::before {
+  background-color: #28a745;
+}
+
+.activity-item.transaction::before {
+  background-color: #fd7e14;
+}
+
+.activity-item.profile::before {
+  background-color: #6610f2;
+}
+
+.activity-item.security::before {
+  background-color: #dc3545;
+}
+
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.activity-title {
+  font-weight: 600;
+}
+
+.activity-date {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.activity-details {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.no-activity {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.no-activity p {
+  margin-bottom: 1.5rem;
+  color: #6c757d;
+  font-size: 1.1rem;
+}
+
+/* Overview Tab Styles */
+.overview-tab {
+  padding: 20px 0;
+}
+
+.icon-container {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.section-title {
+  margin-bottom: 16px;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.metric-value {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.recent-investments {
+  margin-bottom: 30px;
+}
+
+.portfolio-summary p {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.positive {
+  color: #28a745;
+  font-weight: 500;
+}
+
+.negative {
+  color: #dc3545;
+  font-weight: 500;
+}
+
+/* Portfolio Stat Cards */
+.portfolio-stat-card {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+  background-color: #fff;
+}
+
+.portfolio-stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-stat-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  color: #4CAF50; /* A more vibrant, brighter green */
+  opacity: 1.0;
+}
+
+.portfolio-stat-title {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.portfolio-stat-value {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.portfolio-stat-note {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-bottom: 0;
+}
+
+.portfolio-stat-change {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.portfolio-stat-change.positive {
+  color: #28a745;
+}
+
+.portfolio-stat-change.negative {
+  color: #dc3545;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .portfolio-tab,
+  .investments-tab,
+  .watchlist-tab,
+  .analytics-tab,
+  .settings-tab {
+    padding: 15px 0;
+  }
+  
+  .tab-title {
+    margin-bottom: 16px;
+    font-size: 1.5rem;
+  }
+  
+  .investments-summary {
+    padding: 12px 15px;
+  }
+  
+  .investments-table th,
+  .investments-table td {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .watchlist-item-symbol {
+    font-size: 1.1rem;
+  }
+  
+  .watchlist-card-price h4 {
+    font-size: 1.2rem;
+  }
+  
+  .watchlist-card-chart {
+    height: 60px;
+  }
+  
+  .time-range-selector {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .time-range-selector .d-flex {
+    flex-wrap: wrap;
+  }
+  
+  .time-range-select {
+    margin-top: 0.5rem;
+    max-width: 100%;
+  }
+  
+  .chart-placeholder.large {
+    min-height: 200px;
+  }
+  
+  .settings-sidebar {
+    margin-bottom: 1.5rem;
+  }
+  
+  .settings-nav-item {
+    padding: 0.75rem 1rem;
+  }
+  
+  .overview-tab {
+    padding: 15px 0;
+  }
+  
+  .metric-value {
+    font-size: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .metric-cards .col-md-6 {
+    margin-bottom: 1rem;
+  }
+  
+  .allocation-placeholder,
+  .performance-placeholder {
+    padding: 1.5rem;
+    min-height: 150px;
+  }
+  
+  .investments-table {
+    font-size: 0.9rem;
+  }
+  
+  .watchlist-controls .row {
+    flex-direction: column;
+  }
+  
+  .watchlist-controls .col-md-4 {
+    margin-top: 1rem;
+    text-align: center;
+  }
+}
+
+/* Mini Chart Styles */
+.mini-stock-chart {
+  width: 100%;
+  height: 70px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.01);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.mini-chart-placeholder {
+  width: 100%;
+  height: 70px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 12px;
+  text-align: center;
+}
+
+.mini-chart-placeholder.loading {
+  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.06) 50%, rgba(0, 0, 0, 0.03) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.mini-chart-placeholder.error {
+  background-color: rgba(220, 53, 69, 0.05);
+}
+
+.chart-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: #999;
+  font-size: 12px;
+  text-align: center;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.watchlist-card-chart {
+  margin-top: 12px;
+  min-height: 70px;
+  position: relative;
+}
+
+/* Search Button Styling for Investments and Watchlist Tabs */
+.investments-controls .input-group-text,
+.watchlist-controls .input-group-text {
+  width: 40px;            /* Button width */
+  height: 49px;           /* Button height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #E2C290; /* Match the gold from Pet Sounds theme */
+  color: #5B7065;           /* Match the green from Pet Sounds theme */
+  border: none;
+  transition: background-color 0.2s;
+}
+
+/* Control the size of the search icon itself */
+.investments-controls .input-group-text svg,
+.watchlist-controls .input-group-text svg {
+  font-size: 18px;        /* Icon size */
+}
+
+/* Hover effect for search button */
+.investments-controls .input-group-text:hover,
+.watchlist-controls .input-group-text:hover {
+  background-color: #D4AF37; /* Darker gold on hover, matching other buttons */
+  cursor: pointer;
+}
+
+/* Performance Card styling */
+.performance-card {
+  height: 100%;  /* Make all cards 100% height of their container */
+  display: flex;
+  flex-direction: column;
+}
+
+.performance-card .card-body {
+  flex: 1; /* Allow the card body to grow and fill the container */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Add Stock Button styling */
+.add-stock-btn:hover, .add-stock-btn:focus, .add-stock-btn:active {
+  background-color: #2a4a2a !important; /* A slightly darker shade for hover state */
+  border-color: #2a4a2a !important;
+  box-shadow: 0 0 0 0.25rem rgba(53, 94, 53, 0.25) !important;
+}
+
+/* Investment Search Suggestions */
+.investments-controls .search-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 15px;
+}
+
+.filter-info {
+    color: #6c757d;
+    font-style: italic;
+}
+
+.investment-search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1050;
+    margin-top: 3px;
+    max-height: 300px;
+    overflow-y: auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: white;
+}
+
+.suggestion-header {
+    padding: 8px 12px;
+    background-color: #f4f4f4;
+    border-bottom: 1px solid #eaeaea;
+    color: #666;
+    font-style: italic;
+}
+
+.investment-suggestion-item {
+    padding: 10px 15px;
+    transition: background-color 0.2s ease;
+}
+
+.investment-suggestion-item:hover {
+    background-color: #f8f9fa;
+}
+
+.suggestion-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3px;
+}
+
+.suggestion-stock-info {
+    display: flex;
+    align-items: center;
+}
+
+.suggestion-symbol {
+    font-weight: bold;
+    color: #E2C290; /* Gold from Pet Sounds */
+    background-color: rgba(226, 194, 144, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
+
+.suggestion-name {
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.suggestion-price {
+    font-weight: bold;
+    color: #5B7065; /* Green from Pet Sounds */
+}
+
+.suggestion-price.positive {
+    color: #4CAF50; /* Bright green */
+}
+
+.suggestion-price.negative {
+    color: #F44336; /* Red */
+}
+
+.suggestion-sector {
+    color: #6c757d;
+    font-size: 0.8rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .investments-controls .search-container {
+        max-width: 100%;
+    }
+}
+
+.search-suggestions-loading {
+    text-align: center;
+    padding: 1rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Common Tab Styles */
+.watchlist-tab,
+.investments-tab {
+    padding: 5px 0;
+}
+
+.tab-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Controls styling */
+.watchlist-controls,
+.investments-controls {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    padding: 15px;
+}
+
+/* Search container styling */
+.search-container {
+    position: relative;
+}
+
+/* Suggestion styling for both tabs */
+.investment-search-suggestions,
+.watchlist-search-suggestions {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 5px;
+}
+
+.suggestion-header {
+    padding: 8px 12px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+.investment-suggestion-item,
+.watchlist-suggestion-item {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.suggestion-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.suggestion-stock-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.suggestion-symbol {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.suggestion-name {
+    font-size: 13px;
+    color: #555;
+}
+
+.suggestion-price {
+    font-weight: bold;
+}
+
+.suggestion-sector {
+    margin-top: 5px;
+    color: #777;
+}
+
+/* Table styling */
+.investments-table th.sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.investments-table th.sortable:hover {
+    background-color: #f5f5f5;
+}
+
+/* Positive/negative styling */
+.positive {
+    color: #28a745;
+}
+
+.negative {
+    color: #dc3545;
+}
+
+/* Watchlist card styles */
+.watchlist-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #e7e7e7;
+    overflow: hidden;
+}
+
+.watchlist-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.watchlist-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #f8f9fa;
+    padding: 15px;
+}
+
+.watchlist-item-symbol {
+    font-weight: bold;
+    font-size: 18px;
+    margin: 0;
+}
+
+.watchlist-item-name {
+    color: #666;
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+.watchlist-card-price {
+    margin-bottom: 15px;
+}
+
+.watchlist-card-price h4 {
+    margin-bottom: 5px;
+}
+
+.watchlist-item-change {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.watchlist-card-chart {
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.watchlist-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: #f8f9fa;
+}
+
+.watchlist-item-sector {
+    color: #666;
+    font-size: 13px;
+}
+
+/* Empty state styling */
+.empty-state {
+    padding: 30px;
+    text-align: center;
+}
+
+.empty-icon {
+    margin-bottom: 20px;
+}
+
+/* Summary section */
+.investments-summary {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .watchlist-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .watchlist-header .d-flex {
+        margin-top: 10px;
+        width: 100%;
+    }
+    
+    .add-stock-btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* Add Stock Modal styling */
+.modal .search-button {
+    width: 60px;
+    height: 49px; /* Explicit height in pixels instead of percentage */
+    min-height: 49px; /* Ensure minimum height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: var(--pet-sounds-dark-green);
+    border-color: var(--pet-sounds-dark-green);
+    color: white;
+    position: relative;
+    left: 1px; /* Move slightly left */
+    top: 1px;   /* Adjusted to center the taller button */
+    margin-left: -2px; /* Additional left adjustment */
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-top: -1px; /* Pull up slightly */
+    margin-bottom: -1px; /* Push down slightly */
+}
+
+/* Also adjust the parent input group to accommodate taller button */
+.modal .input-group {
+    align-items: stretch;
+}
+
+.modal .form-control {
+    height: auto;
+    min-height: 42px;
+}
+
+.modal .search-button:hover:not(:disabled),
+.modal .search-button:focus:not(:disabled) {
+    background-color: var(--pet-sounds-darker-green, #2a4a2a);
+    border-color: var(--pet-sounds-darker-green, #2a4a2a);
+    color: white;
+}
+
+.modal .search-button svg {
+    font-size: 1.2rem;
+}
+
+.modal .search-button:disabled {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    opacity: 0.65;
+}
+
+/* Search Results styling */
+.search-results {
+    margin-bottom: 1rem;
+}
+
+.search-results .list-group-item {
+    transition: background-color 0.2s ease;
+}
+
+.search-results .list-group-item:hover {
+    background-color: rgba(91, 112, 101, 0.05);
+}
+
+.search-results .list-group-item.active {
+    background-color: var(--pet-sounds-dark-green);
+    border-color: var(--pet-sounds-dark-green);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .investments-controls .search-container {
+        max-width: 100%;
+    }
+} 

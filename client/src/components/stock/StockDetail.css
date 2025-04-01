@@ -1,0 +1,578 @@
+.stock-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 3rem;
+    padding-top: 1rem;
+}
+
+.stock-header-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.stock-header-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.stock-name {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #333;
+}
+
+.stock-symbol {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.stock-sector {
+    color: #6c757d;
+    font-size: 1rem;
+}
+
+.stock-price {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.stock-change {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.stock-change.positive {
+    color: #28a745;
+}
+
+.stock-change.negative {
+    color: #dc3545;
+}
+
+.stock-timestamp {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.stock-tabs {
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.stock-tabs .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    color: #666 !important;
+    font-weight: 500;
+    border: none !important;
+    border-radius: 0 !important;
+    transition: all 0.2s ease;
+}
+
+.stock-tabs .nav-link:hover {
+    color: #5B7065 !important;
+    background-color: rgba(91, 112, 101, 0.05);
+}
+
+.stock-tabs .nav-link.active {
+    color: #5B7065 !important;
+    font-weight: 600;
+    background-color: #fff !important;
+    border-bottom: 3px solid #5B7065 !important;
+}
+
+.tab-content {
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 0 0 8px 8px;
+    min-height: 400px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.chart-container {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.chart-container .card {
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.chart-container .card-body {
+    padding: 20px;
+}
+
+.metrics-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.metrics-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.metrics-card .card-header {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+}
+
+.metric-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.metric-item:last-child {
+    border-bottom: none;
+}
+
+.metric-label {
+    color: #666;
+    font-weight: 500;
+}
+
+.metric-value {
+    font-weight: 600;
+    color: #333;
+}
+
+.metric-value.positive {
+    color: #28a745;
+}
+
+.metric-value.negative {
+    color: #dc3545;
+}
+
+.prediction-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #007bff;
+}
+
+.prediction-card.positive {
+    border-left-color: #28a745;
+}
+
+.prediction-card.negative {
+    border-left-color: #dc3545;
+}
+
+.prediction-card .card-header {
+    background-color: transparent;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+}
+
+.prediction-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.prediction-value.positive {
+    color: #28a745;
+}
+
+.prediction-value.negative {
+    color: #dc3545;
+}
+
+.transaction-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.transaction-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.transaction-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.transaction-type {
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.transaction-type.buy {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.transaction-type.sell {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
+
+.transaction-date {
+    color: #777;
+    font-size: 0.875rem;
+}
+
+.transaction-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.transaction-label {
+    color: #666;
+    font-weight: 500;
+}
+
+.transaction-value {
+    font-weight: 600;
+    color: #333;
+}
+
+.trade-buttons {
+    margin-top: 1rem;
+}
+
+.trade-buttons .btn {
+    padding: 0.4rem 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+}
+
+.trade-buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 767.98px) {
+    .stock-name {
+        font-size: 1.8rem;
+    }
+    
+    .stock-price {
+        font-size: 2rem;
+        margin-top: 1rem;
+    }
+    
+    .stock-tabs .nav-link {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .stock-tabs .nav-link svg {
+        margin-right: 0.25rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .stock-tabs {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .stock-tabs .nav-link {
+        flex-direction: column;
+        padding: 0.5rem;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .stock-tabs .nav-link svg {
+        margin-right: 0;
+        margin-bottom: 0.25rem;
+    }
+    
+    .stock-tabs .nav-item {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+/* Price Alerts */
+.stock-feature-card {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stock-feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.active-alerts-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.alert-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.alert-item:last-child {
+    border-bottom: none;
+}
+
+.alert-price {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Responsive design for price alerts */
+@media (max-width: 768px) {
+    .alert-item {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+    
+    .alert-item button {
+        margin-top: 0.5rem;
+        align-self: flex-end;
+    }
+}
+
+/* Enhanced styling for prediction card */
+.prediction-card {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    margin-bottom: 20px;
+}
+
+.prediction-card.positive {
+    border-left: 4px solid #28a745;
+}
+
+.prediction-card.negative {
+    border-left: 4px solid #dc3545;
+}
+
+.prediction-card .card-header {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.prediction-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+.prediction-value.positive {
+    color: #28a745;
+}
+
+.prediction-value.negative {
+    color: #dc3545;
+}
+
+.metric-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.metric-label {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.metric-value {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.current-price {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.current-price-label {
+    color: #6c757d;
+}
+
+.current-price-value {
+    font-weight: 600;
+}
+
+.model-explanation {
+    text-align: right;
+    color: #6c757d;
+}
+
+/* Technical Indicators Card */
+.technical-indicators-card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.technical-indicators-card .card-header {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.indicator-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.indicator-table td:first-child {
+    font-weight: 600;
+}
+
+.indicator-table td:nth-child(2) {
+    font-family: monospace;
+    text-align: right;
+}
+
+/* Info Card */
+.info-card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-card .card-header {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .prediction-value {
+        font-size: 1.5rem;
+    }
+    
+    .indicator-table td:nth-child(3) {
+        display: none; /* Hide interpretation column on small screens */
+    }
+}
+
+/* Add styles for fallback prediction */
+.fallback-prediction-alert {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.countdown-timer {
+  font-family: monospace;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: 5px;
+}
+
+/* Style for next candle estimate */
+.estimations-container {
+  margin-top: 10px;
+}
+
+.fallback-line {
+  stroke: #ff9800 !important;
+  stroke-width: 3 !important;
+}
+
+.fallback-dot {
+  fill: #ff9800 !important;
+  r: 6 !important;
+}
+
+/* Add a pulsating animation for the fallback prediction dot */
+@keyframes pulse {
+  0% {
+    r: 5;
+    opacity: 1;
+  }
+  50% {
+    r: 8;
+    opacity: 0.8;
+  }
+  100% {
+    r: 5;
+    opacity: 1;
+  }
+}
+
+.chart-container .recharts-dot.fallback-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Add additional styling for the back button to make it more visible */
+.back-button {
+    margin-top: 1rem;
+    position: relative;
+    z-index: 10; /* Ensure it stays above other elements */
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    font-weight: 500;
+    color: #495057;
+    transition: all 0.2s ease;
+}
+
+.back-button:hover {
+    background-color: #e9ecef;
+    color: #212529;
+}
+
+/* Add these selectors to allow custom positioning of arrow and text */
+.back-button .back-arrow {
+    position: relative;
+    /* Adjustable margins to position the arrow */
+    margin-right: 8px;
+    /* You can adjust these values to reposition the arrow */
+    top: 0px;
+    left: 0px;
+}
+
+.back-button .back-text {
+    position: relative;
+    /* You can adjust these values to reposition the text */
+    top: 0px;
+    left: 0px;
+} 

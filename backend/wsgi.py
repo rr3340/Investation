@@ -1,5 +1,5 @@
-from main import create_app
-from config import DevConfig
+from backend.main import create_app
+from backend.config import DevConfig
 
 app = create_app(DevConfig)
 

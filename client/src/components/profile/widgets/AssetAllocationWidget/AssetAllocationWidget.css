@@ -1,0 +1,153 @@
+.asset-allocation-widget {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.asset-allocation-widget:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.asset-allocation-card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.asset-allocation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 19px;
+  border-bottom: 1px solid #cfcfcf;
+  background-color: #f8f8f8;
+}
+
+.asset-allocation-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0;
+  color: #000000;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.allocation-tabs .nav-link {
+  display: flex !important;
+  align-items: center !important;
+  padding: 0.75rem 1.5rem !important;
+  color: #666 !important;
+  font-weight: 500 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  transition: all 0.2s ease !important;
+  margin-right: 5px !important;
+  font-size: 1rem !important;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+.allocation-tabs .nav-link:hover {
+  color: #5B7065 !important;
+  background-color: rgba(91, 112, 101, 0.05) !important;
+}
+
+.allocation-tabs .nav-link.active {
+  color: #5B7065 !important;
+  font-weight: 600 !important;
+  background-color: #fff !important;
+  border-bottom: 3px solid #5B7065 !important;
+}
+
+.allocation-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.allocation-chart {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.allocation-table {
+  flex: 1;
+  min-width: 300px;
+  padding: 0 15px;
+}
+
+.allocation-table h6 {
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.allocation-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.allocation-table th {
+  text-align: left;
+  padding: 8px 0;
+  font-size: 0.8rem;
+  color: #888;
+  border-bottom: 1px solid #cfcfcf;
+}
+
+.allocation-table td {
+  padding: 8px 0;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.color-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.custom-tooltip {
+  background-color: #fff;
+  border: 1px solid #f0f0f0;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip-label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.tooltip-value, .tooltip-percentage {
+  margin: 0;
+}
+
+.center-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 100%;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .allocation-container {
+    flex-direction: column;
+  }
+  
+  .allocation-chart, .allocation-table {
+    width: 100%;
+  }
+  
+  .allocation-table {
+    margin-top: 20px;
+  }
+} 

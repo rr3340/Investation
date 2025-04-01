@@ -24,7 +24,6 @@ trade_history_model = trade_history_ns.model(
 
 @trade_history_ns.route('/')
 class TradeHistoryResource(Resource):
-    @jwt_required()
     @trade_history_ns.marshal_list_with(trade_history_model)
     def get(self):
         """Get all trade history items"""
@@ -54,7 +53,6 @@ class TradeHistoryResource(Resource):
 
 @trade_history_ns.route('/<int:id>')
 class TradeHistoryResourceById(Resource):
-    @jwt_required()
     @trade_history_ns.marshal_with(trade_history_model)
     def get(self, id):
         """Get trade history item by id"""
@@ -87,7 +85,6 @@ class TradeHistoryResourceById(Resource):
     
 @trade_history_ns.route('/user/<int:user_id>')
 class TradeHistoryByUserResource(Resource):
-    @jwt_required()
     @trade_history_ns.response(200, 'Success')
     @trade_history_ns.response(404, 'User not found')
     def get(self, user_id):
