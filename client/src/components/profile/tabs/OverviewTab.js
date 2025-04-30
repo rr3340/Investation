@@ -2,30 +2,12 @@ import React, { useState } from 'react';
 import { Row, Col, Card, ProgressBar, Table } from 'react-bootstrap';
 import { FaChartLine, FaChartPie, FaMoneyBillWave, FaShieldAlt } from 'react-icons/fa';
 import { AssetAllocationWidget } from '../widgets';
+import { formatCurrency, formatPercentage } from '../../../lib/utils/formatUtils';
+import { formatDate } from '../../../lib/utils/dateUtils';
 import './TabStyles.css';
 
 const OverviewTab = ({ userId, userData, portfolioData, investmentsData }) => {
     const [loading, setLoading] = useState(false);
-    
-    //Format the currency values
-    const formatCurrency = (value) => {
-        if (value === undefined || value === null) return '-';
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            minimumFractionDigits: 2
-        }).format(value);
-    };
-    
-    //Format the percentage values
-    const formatPercentage = (value) => {
-        if (value === undefined || value === null) return '-';
-        return new Intl.NumberFormat('en-US', {
-            style: 'percent',
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }).format(value / 100);
-    };
     
     // Get the risk info based on risk score or risk_tolerance.
     const getRiskInfo = (riskScore, riskTolerance) => {
@@ -189,7 +171,7 @@ const OverviewTab = ({ userId, userData, portfolioData, investmentsData }) => {
                                             <td>{investment.quantity}</td>
                                             <td>{formatCurrency(investment.current_value || (investment.current_price * investment.quantity))}</td>
                                             <td className={investment.change_percentage >= 0 ? 'positive' : 'negative'}>
-                                                {investment.change_percentage >= 0 ? '+' : ''}{formatPercentage(investment.change_percentage)}
+                                                {investment.change_percentage >= 0 ? '+' : ''}{formatPercentage(investment.change_percentage, false)}
                                             </td>
                                         </tr>
                                     ))}
@@ -204,7 +186,7 @@ const OverviewTab = ({ userId, userData, portfolioData, investmentsData }) => {
                 <h4 className="section-title">Portfolio Summary</h4>
                 <Card>
                     <Card.Body>
-                        <p><strong>Account Created:</strong> {new Date(userData?.created_at).toLocaleDateString()}</p>
+                        <p><strong>Account Created:</strong> {formatDate(userData?.created_at)}</p>
                         <p><strong>Risk Profile:</strong> {riskInfo.level}</p>
                         <p><strong>Risk Tolerance:</strong> {portfolioData?.risk_tolerance ? portfolioData.risk_tolerance.charAt(0).toUpperCase() + portfolioData.risk_tolerance.slice(1) : 'Unknown'}</p>
                         <p><strong>Total Assets:</strong> {formatCurrency(totalAssets)}</p>

@@ -2,21 +2,10 @@ import React from 'react';
 import { Card, Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaArrowUp, FaArrowDown, FaStar, FaRegStar } from 'react-icons/fa';
+import { formatCurrency, formatPercentage } from '../../lib/utils/formatUtils';
 import './StockCard.css';
 
 const StockCard = ({ stock, isInWatchlist, onToggleWatchlist }) => {
-  const formatCurrency = (value) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2
-    }).format(value);
-  };
-
-  const formatPercentage = (value) => {
-    return `${(value * 100).toFixed(2)}%`;
-  };
-
   const isPriceChangePositive = stock.change_percentage > 0;
 
   return (

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Spinner, Alert, Nav } from 'react-bootstrap';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import { investmentApi, portfolioApi, stockApi } from '../../../../lib/api';
+import { formatCurrency } from '../../../../lib/utils/formatUtils';
 import './AssetAllocationWidget.css';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#82CA9D', '#FFC658', '#8DD1E1'];
@@ -141,29 +142,6 @@ const AssetAllocationWidget = ({ userId }) => {
     return { bySector, byIndustry, totalValue };
   };
   
-  const formatCurrency = (value) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2
-    }).format(value);
-  };
-  
-  //A custom tooltip component for the pie chart.
-  const CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload;
-      return (
-        <div className="custom-tooltip">
-          <p className="tooltip-label">{data.name}</p>
-          <p className="tooltip-value">{formatCurrency(data.value)}</p>
-          <p className="tooltip-percentage">{data.percentage}%</p>
-        </div>
-      );
-    }
-    return null;
-  };
-  
   const getCurrentData = () => {
     return activeView === 'sector' ? allocationData.bySector : allocationData.byIndustry;
   };
@@ -216,6 +194,21 @@ const AssetAllocationWidget = ({ userId }) => {
         </table>
       </div>
     );
+  };
+  
+  //A custom tooltip component for the pie chart.
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload;
+      return (
+        <div className="custom-tooltip">
+          <p className="tooltip-label">{data.name}</p>
+          <p className="tooltip-value">{formatCurrency(data.value)}</p>
+          <p className="tooltip-percentage">{data.percentage}%</p>
+        </div>
+      );
+    }
+    return null;
   };
   
   return (

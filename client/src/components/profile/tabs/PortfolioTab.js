@@ -12,6 +12,8 @@ import { portfolioApi, investmentApi, stockApi } from '../../../lib/api';
 import { AssetAllocationWidget } from '../widgets';
 import './TabStyles.css';
 import { stockDataRefreshManager } from '../../../services';
+import { formatCurrency, formatPercentage } from '../../../lib/utils/formatUtils';
+import { formatTime } from '../../../lib/utils/dateUtils';
 
 const PortfolioTab = ({ userId, portfolio: initialPortfolio }) => {
     const [portfolio, setPortfolio] = useState(initialPortfolio || { networth: 0, balance: 0, risk_tolerance: 'low' });
@@ -385,42 +387,6 @@ const PortfolioTab = ({ userId, portfolio: initialPortfolio }) => {
         };
     }, [enrichedInvestmentsData]);
     
-    //Formats the currency values.
-    const formatCurrency = (value) => {
-        const numValue = parseFloat(value);
-        if (isNaN(numValue)) {
-            return '$0.00';
-        }
-        
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }).format(numValue);
-    };
-    
-    //Formats percentage values, handling NaN and undefined
-    const formatPercentage = (value, includeSign = false) => {
-        //Ensures value is a number
-        const numValue = parseFloat(value);
-        if (isNaN(numValue)) {
-            return '0.00%';
-        }
-        
-        const formattedValue = new Intl.NumberFormat('en-US', {
-            style: 'percent',
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }).format(numValue / 100);
-        
-        if (includeSign && numValue > 0) {
-            return `+${formattedValue}`;
-        }
-        
-        return formattedValue;
-    };
-    
     //Gets risk tolerance display text and color.
     const getRiskInfo = (riskLevel) => {
         if (!riskLevel) {
@@ -473,7 +439,7 @@ const PortfolioTab = ({ userId, portfolio: initialPortfolio }) => {
                                         <div className={performanceSummary.totalGain >= 0 ? 'text-success' : 'text-danger'}>
                                             {formatCurrency(performanceSummary.totalGain)}
                                             {' '}
-                                            ({formatPercentage(performanceSummary.percentageGain, true)})
+                                            ({formatPercentage(performanceSummary.percentageGain, false, true)})
                                         </div>
                                     </div>
                                 </Card.Body>
@@ -493,7 +459,7 @@ const PortfolioTab = ({ userId, portfolio: initialPortfolio }) => {
                                             </div>
                                             <div className="text-success performance-value">
                                                 <FaArrowUp className="me-1" />
-                                                {formatPercentage(performanceSummary.bestPerformer.gainPercentage)}
+                                                {formatPercentage(performanceSummary.bestPerformer.gainPercentage, false)}
                                             </div>
                                         </div>
                                     )}
@@ -510,7 +476,7 @@ const PortfolioTab = ({ userId, portfolio: initialPortfolio }) => {
                                                     <FaArrowUp className="me-1" /> : 
                                                     <FaArrowDown className="me-1" />
                                                 }
-                                                {formatPercentage(performanceSummary.worstPerformer.gainPercentage)}
+                                                {formatPercentage(performanceSummary.worstPerformer.gainPercentage, false)}
                                             </div>
                                         </div>
                                     )}
@@ -553,7 +519,7 @@ const PortfolioTab = ({ userId, portfolio: initialPortfolio }) => {
                                             <FaArrowUp className="me-1" /> : 
                                             <FaArrowDown className="me-1" />
                                         }
-                                        {formatPercentage(investment.dailyPerformance.dailyPercentChange)}
+                                        {formatPercentage(investment.dailyPerformance.dailyPercentChange, false)}
                                     </td>
                                     <td>{formatCurrency(investment.gainValue)}</td>
                                     <td className={investment.gainPercentage >= 0 ? 'text-success' : 'text-danger'}>
@@ -561,7 +527,7 @@ const PortfolioTab = ({ userId, portfolio: initialPortfolio }) => {
                                             <FaArrowUp className="me-1" /> : 
                                             <FaArrowDown className="me-1" />
                                         }
-                                        {formatPercentage(investment.gainPercentage)}
+                                        {formatPercentage(investment.gainPercentage, false)}
                                     </td>
                                 </tr>
                             ))}
@@ -664,12 +630,12 @@ const PortfolioTab = ({ userId, portfolio: initialPortfolio }) => {
                                                 )}
                                                 {formatCurrency(performanceSummary.dailyChange)} 
                                                 <span className="ms-2">
-                                                    ({formatPercentage(performanceSummary.dailyPercentChange, true)})
+                                                    ({formatPercentage(performanceSummary.dailyPercentChange, false, true)})
                                                 </span>
                                             </div>
                                         </div>
                                         <div className="daily-change-heading text-center mb-3">
-                                            <p className="text-muted mb-0">Last updated: {new Date().toLocaleTimeString()}</p>
+                                            <p className="text-muted mb-0">Last updated: {formatTime(new Date())}</p>
                                         </div>
                                     </div>
                                 </Col>
@@ -686,7 +652,7 @@ const PortfolioTab = ({ userId, portfolio: initialPortfolio }) => {
                                             </div>
                                             <div className="text-success performance-value">
                                                 <FaArrowUp className="me-1" />
-                                                {formatPercentage(performanceSummary.bestDailyPerformer.dailyPerformance.dailyPercentChange)}
+                                                {formatPercentage(performanceSummary.bestDailyPerformer.dailyPerformance.dailyPercentChange, false)}
                                             </div>
                                         </div>
                                     )}
@@ -704,7 +670,7 @@ const PortfolioTab = ({ userId, portfolio: initialPortfolio }) => {
                                                     <FaArrowUp className="me-1" /> : 
                                                     <FaArrowDown className="me-1" />
                                                 }
-                                                {formatPercentage(performanceSummary.worstDailyPerformer.dailyPerformance.dailyPercentChange)}
+                                                {formatPercentage(performanceSummary.worstDailyPerformer.dailyPerformance.dailyPercentChange, false)}
                                             </div>
                                         </div>
                                     )}

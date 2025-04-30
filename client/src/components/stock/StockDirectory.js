@@ -7,6 +7,7 @@ import { FaSearch, FaStar, FaChartLine, FaFilter, FaSort, FaHistory, FaSignInAlt
 import './StockDirectory.css';
 import StockList from './StockList';
 import { formatNumberWithCommas } from '../../lib/utils/numberUtils';
+import { formatCurrency, formatPercentage } from '../../lib/utils/formatUtils';
 import { stockDataRefreshManager } from '../../services';
 
 const StockDirectory = () => {
@@ -26,14 +27,6 @@ const StockDirectory = () => {
     priceRange: [0, 5000],
     sortBy: 'name'
   });
-
-  const formatCurrency = (value) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2
-    }).format(value);
-  };
 
   const fetchAllStocksData = async () => {
     setLoading(true);
@@ -342,7 +335,7 @@ const StockDirectory = () => {
             <div className="text-end">
               <div className="stock-price">{formatCurrency(current_price || 0)}</div>
               <div className={`change-percent ${(change_percent || 0) >= 0 ? 'positive' : 'negative'}`}>
-                {(change_percent || 0) >= 0 ? '+' : ''}{(change_percent || 0).toFixed(2)}%
+                {formatPercentage(change_percent || 0, false, true)}
               </div>
             </div>
           </div>

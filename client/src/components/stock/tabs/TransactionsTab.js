@@ -6,6 +6,8 @@ import { stockApi, investmentApi, portfolioApi, tradeHistoryApi } from '../../..
 import './TransactionsTab.css';
 import { formatDateTime } from '../../../lib/utils/dateUtils';
 import { stockDataRefreshManager } from '../../../services';
+import { formatCurrency, formatPercentage } from '../../../lib/utils/formatUtils';
+import { formatNumberPrecision } from '../../../lib/utils/numberUtils';
 
 const TransactionsTab = ({ stock, stockKey }) => {
   const { currentUser } = useAuth();
@@ -195,25 +197,6 @@ const TransactionsTab = ({ stock, stockKey }) => {
       refreshTradeHistory();
     }
   }, [success, currentUser, stockKey]);
-
-  const formatCurrency = (value) => {
-    if (value === null || value === undefined || isNaN(value)) {
-      return '$0.00';
-    }
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2
-    }).format(value);
-  };
-
-  const formatPercentage = (value) => {
-    if (value === null || value === undefined || isNaN(value)) {
-      return '0.00%';
-    }
-    const sign = value > 0 ? '+' : '';
-    return `${sign}${value.toFixed(2)}%`;
-  };
 
   // Handle the quantity change, incrementing and decrementing.
   const handleQuantityChange = (e) => {
@@ -460,7 +443,7 @@ const TransactionsTab = ({ stock, stockKey }) => {
                       <span className="input-group-text">$</span>
                       <Form.Control
                         type="text"
-                        value={loadingPrice ? 'Loading...' : (priceData ? priceData.latest_price.toFixed(2) : 'N/A')}
+                        value={loadingPrice ? 'Loading...' : (priceData ? formatNumberPrecision(priceData.latest_price, 2) : 'N/A')}
                         readOnly
                         disabled
                       />
@@ -513,7 +496,7 @@ const TransactionsTab = ({ stock, stockKey }) => {
                       <span className="input-group-text">$</span>
                       <Form.Control
                         type="text"
-                        value={loadingPrice ? 'Calculating...' : calculateTotal().toFixed(2)}
+                        value={loadingPrice ? 'Calculating...' : formatNumberPrecision(calculateTotal(), 2)}
                         readOnly
                         disabled
                       />

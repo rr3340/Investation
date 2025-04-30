@@ -10,6 +10,7 @@ import TransactionsTab from './tabs/TransactionsTab';
 import './StockDetail.css';
 import { formatDate, formatDateTime, formatTime, ensureUTCDate } from '../../lib/utils/dateUtils';
 import { stockDataRefreshManager } from '../../services';
+import { formatCurrency, formatPercentage } from '../../lib/utils/formatUtils';
 
 const StockDetail = () => {
     const { stockKey } = useParams();
@@ -471,19 +472,6 @@ const StockDetail = () => {
         }
     };
     
-    const formatCurrency = (value) => {
-        if (value === undefined || value === null) return 'N/A';
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD'
-        }).format(value);
-    };
-    
-    const formatPercentage = (value) => {
-        if (value === undefined || value === null) return 'N/A';
-        return `${(value > 0 ? '+' : '')}${value.toFixed(2)}%`;
-    };
-    
     // Handle the tab change.
     const handleTabChange = (tab) => {
         setActiveTab(tab);
@@ -830,7 +818,7 @@ const StockDetail = () => {
                             </h2>
                             <p className="stock-timestamp">
                                 {priceData && priceData.timestamp ? 
-                                    `Last updated: ${formatTime(new Date(ensureUTCDate(priceData.timestamp)))} EDT` : 
+                                    `Last updated: ${formatDateTime(new Date(ensureUTCDate(priceData.timestamp)))}` : 
                                     'Last updated: N/A'}
                             </p>
                             {currentUser && (

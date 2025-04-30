@@ -105,7 +105,12 @@ def process_from_database(df):
     df['plus_di'], df['minus_di'], df['adx'] = get_adx(df['high'], df['low'], df['close'], normal_window) #get values from function and form columns
 
     #Clean + drop unnecessary columns
-    df = df.drop(columns=['shift_one_forward', "High_N", "Low_N"]).dropna()
+    df = df.drop(columns=['shift_one_forward', "High_N", "Low_N"])
+
+    last_row = df.iloc[-1:].copy()
+    last_row = last_row.fillna(0)
+    df_without_last = df.iloc[:-1].dropna()
+    df = pd.concat([df_without_last, last_row])
     
     print(df.columns)
 

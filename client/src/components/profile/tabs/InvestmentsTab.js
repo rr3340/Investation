@@ -4,6 +4,7 @@ import { FaSearch, FaSort, FaSortUp, FaSortDown, FaPlus, FaTimes, FaChartLine } 
 import { investmentApi, stockApi } from '../../../lib/api';
 import { useAuth } from '../../../lib/hooks/useAuth';
 import { useDebounce } from '../../../lib/hooks/useDebounce';
+import { formatCurrency, formatPercentage } from '../../../lib/utils/formatUtils';
 import './TabStyles.css';
 import { stockDataRefreshManager } from '../../../services';
 
@@ -269,25 +270,6 @@ const InvestmentsTab = ({ userId, investments: initialInvestments }) => {
         
         setFilteredInvestments(filtered);
     }, [enrichedInvestments, searchTerm, sortBy, sortDirection, selectedSector]);
-    
-    //Format the currency vals.
-    const formatCurrency = (value) => {
-        if (value === undefined || value === null || isNaN(value)) {
-            return '$0.00';
-        }
-        
-        //Formats the currency value to 2 decimal places with dollar sign.
-        return `$${value.toFixed(2)}`;
-    };
-    
-    //Formats percentage values.
-    const formatPercentage = (value) => {
-        if (value === undefined || value === null || isNaN(value)) {
-            return '0.00%';
-        }
-        
-        return `${value.toFixed(2)}%`;
-    };
     
     //Handles search input change.
     const handleSearchChange = (e) => {

@@ -16,7 +16,7 @@ const ContactPage = () => {
             </Row>
             
             <Row className="mb-5">
-                <Col md={6} className="mb-4 mx-auto">
+                <Col md={8} lg={6} className="mb-4">
                     <Card className="h-100" style={{ borderColor: 'var(--pet-sounds-tan)' }}>
                         <Card.Header style={{ backgroundColor: 'var(--pet-sounds-green)', color: 'white' }}>
                             <h3 className="h5 mb-0 d-flex align-items-center">
