@@ -26,9 +26,9 @@
     <img src="client/public/investation.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3>Investation</h3>
-
 <br />
+
+</div>
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -61,7 +61,6 @@
 
 ### Features
 
-<div style="text-align: left; display: inline-block;">
 * **Live Stock Market**: Live tracking of stock prices with automatic updates.
 * **Interactive Portfolio Management**: Buy, sell, and track investments in a personalized dashboard.
 * **AI-Powered Price Predictions**: Machine learning models (SVM and LSTM) to forecast potential stock movements.
@@ -69,11 +68,9 @@
 * **Price Alerts**: Customizable notifications when stocks cross specified price thresholds.
 * **Track Portfolio Value**: Real-time calculation of asset values, user networth, and investment growth.
 * **Secure User Authentication**: Ensures protected access to user information and transactions. 
-</div>
 
 <p align="right">(<a href="#readme-top">Back to Top</a>)</p>
 
-<div align="center">
 ### Built With:
 
 [![React][React]][React-url]
@@ -84,10 +81,10 @@
 [![SQLite][SQLite]][SQLite-url]
 [![yfinance API][yfinance API]][yfinance-url]
 
+
 ### Demo:
 
 ## Home Pages
-</div>
 
 <div align="center">
   <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
@@ -102,9 +99,7 @@
   </div>
 </div>
 
-<div align="center">
 ## Home Pages in Action
-</div>
 
 <div align="center">
   <div style="margin-bottom: 20px;">
@@ -113,9 +108,7 @@
   </div>
 </div>
 
-<div align="center">
 ## Profile Pages
-</div>
 
 <div align="center">
   <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
@@ -133,9 +126,7 @@
   </div>
 </div>
 
-<div align="center">
 ## Profile Pages in Action
-</div>
 
 <div align="center">
   <div style="margin-bottom: 20px;">
@@ -149,9 +140,7 @@
   </div>
 </div>
 
-<div align="center">
 ## Stock Pages
-</div>
 
 <div align="center">
   <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
@@ -167,9 +156,7 @@
   </div>
 </div>
 
-<div align="center">
 ## Stock Features in Action
-</div>
 
 <div align="center">
   <div style="margin-bottom: 20px;">
@@ -200,16 +187,13 @@
 
 ### Prerequisites
 
-<div style="text-align: left; display: inline-block;">
 For this app, you'll need:
 
 * Python 3.8+
 * Node.js and npm
-</div>
 
 ### Installation
 
-<div style="text-align: left; display: inline-block;">
 1. Clone this repository:
 
    ```sh
@@ -321,7 +305,6 @@ For this app, you'll need:
     npm install
     npm start
    ```
-</div>
 
 <p align="right">(<a href="#readme-top">Back to Top</a>)</p>
 
