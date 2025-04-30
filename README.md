@@ -26,6 +26,8 @@
     <img src="client/public/investation.png" alt="Logo" width="80" height="80">
   </a>
 
+  <h3>Investation</h3>
+
 <br />
 
 <!-- TABLE OF CONTENTS -->
