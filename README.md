@@ -1,5 +1,4 @@
 # FinanceApp
-A fully integrated backend implementing the yfinance data pipeline, constructing the backbone of a stock investment app.
 
 <a name="readme-top"></a>
 
@@ -28,6 +27,7 @@ A fully integrated backend implementing the yfinance data pipeline, constructing
   </a>
 
 <br />
+</div>
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -68,18 +68,19 @@ A fully integrated backend implementing the yfinance data pipeline, constructing
 * **Track Portfolio Value**: Real-time calculation of asset values, user networth, and investment growth.
 * **Secure User Authentication**: Ensures protected access to user information and transactions. 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">Back to Top</a>)</p>
 
-### Built With
+<div align="center">
+### Built With:
 
-* [![React][React]][React-url]
-* [![Flask][Flask]][Flask-url]
-* [![Python][Python]][Python-url]
-* [![JavaScript][JavaScript]][JavaScript-url]
-* [![AWS][AWS]][AWS-url]
-* [![SQLite][SQLite]][SQLite-url]
-* [![yfinance API][yfinance API]][yfinance-url]
-
+[![React][React]][React-url]
+[![Flask][Flask]][Flask-url]
+[![Python][Python]][Python-url]
+[![JavaScript][JavaScript]][JavaScript-url]
+[![AWS][AWS]][AWS-url]
+[![SQLite][SQLite]][SQLite-url]
+[![yfinance API][yfinance API]][yfinance-url]
+</div>
 
 ### Demo:
 
