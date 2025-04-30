@@ -5,6 +5,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { useAuth } from '../../../lib/hooks/useAuth';
 import { formatTime, formatDateTime, formatDate, ensureUTCDate } from '../../../lib/utils/dateUtils';
 import { stockDataRefreshManager } from '../../../services';
+import { formatCurrency, formatPercentage } from '../../../lib/utils/formatUtils';
 
 const AnalysisTab = ({ stock, priceData, predictionData, processedData, mlProcessingLoading, mlProcessingRun }) => {
   const [activeTab, setActiveTab] = useState('indicators');
@@ -304,23 +305,6 @@ const AnalysisTab = ({ stock, priceData, predictionData, processedData, mlProces
         indicators: { bullishCount: 0, bearishCount: 0, totalCount: 0 }
       });
     }
-  };
-
-  // Formats the currency with 2 decimal places
-  const formatCurrency = (value) => {
-    if (value === null || value === undefined) return 'N/A';
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(value);
-  };
-
-  // Format percentage with 2 decimal places
-  const formatPercentage = (value) => {
-    if (value === null || value === undefined) return 'N/A';
-    return `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
   };
 
   // Calculates the prediction direction and class.

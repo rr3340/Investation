@@ -2,25 +2,13 @@ import React from 'react';
 import { Card, Row, Col, Table } from 'react-bootstrap';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Legend } from 'recharts';
 import { formatDate, formatTime, formatDateTime, ensureUTCDate } from '../../../lib/utils/dateUtils';
+import { formatCurrency, formatPercentage } from '../../../lib/utils/formatUtils';
+import { formatNumberWithCommas } from '../../../lib/utils/numberUtils';
 
 const OverviewTab = ({ stock, priceData, historicalData }) => {
-  const formatCurrency = (value) => {
-    if (value === undefined || value === null) return 'N/A';
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2
-    }).format(value);
-  };
-
-  const formatPercentage = (value) => {
-    if (value === undefined || value === null) return 'N/A';
-    return `${(value * 100).toFixed(2)}%`;
-  };
-
   const formatDateToDisplay = (dateString) => {
     if (!dateString) return 'N/A';
-    return formatDate(dateString);
+    return formatDateTime(new Date(ensureUTCDate(dateString)));
   };
 
   const prepareChartData = () => {
@@ -157,30 +145,6 @@ const OverviewTab = ({ stock, priceData, historicalData }) => {
                       <div className="text-muted mb-2">
                         Showing data from {formatDateToDisplay(historicalData[0].datetime)} to {formatDateToDisplay(historicalData[historicalData.length - 1].datetime)}
                       </div>
-                      <Table responsive striped hover>
-                        <thead>
-                          <tr>
-                            <th>Date</th>
-                            <th>Open</th>
-                            <th>High</th>
-                            <th>Low</th>
-                            <th>Close</th>
-                            <th>Volume</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {historicalData.slice().reverse().slice(0, 5).map((dataPoint, index) => (
-                            <tr key={index}>
-                              <td>{formatDateToDisplay(dataPoint.datetime)}</td>
-                              <td>{formatCurrency(dataPoint.open)}</td>
-                              <td>{formatCurrency(dataPoint.high)}</td>
-                              <td>{formatCurrency(dataPoint.low)}</td>
-                              <td>{formatCurrency(dataPoint.close)}</td>
-                              <td>{dataPoint.volume ? dataPoint.volume.toLocaleString() : 'N/A'}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </Table>
                     </>
                   )}
                 </Card.Body>

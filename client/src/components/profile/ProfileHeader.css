@@ -24,10 +24,9 @@
     position: absolute;
     width: 150px;
     height: 150px;
-    left: 5%;
-    top: 50%;
+    left: 15%;
+    top: 30%;
     z-index: 2;
-    transform: translateY(-50%);
 }
 
 .profile-avatar {

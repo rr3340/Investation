@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { ResponsiveContainer, LineChart, Line, Tooltip, YAxis, ReferenceLine, XAxis } from 'recharts';
 import { stockApi } from '../../lib/api';
 import { formatTime, formatDateTime, ensureUTCDate } from '../../lib/utils/dateUtils';
+import { formatCurrency } from '../../lib/utils/formatUtils';
 import { stockDataRefreshManager } from '../../services';
 
 const MiniStockChart = ({ 
@@ -15,21 +16,7 @@ const MiniStockChart = ({
   const [error, setError] = useState(null);
   const [priceInfo, setPriceInfo] = useState({ currentPrice: null, priceChange: null, changeDirection: null });
 
-  // Memoize the formatter in order to get a better performance. This is defined early to avoid linter errors.
-  const formatCurrency = useMemo(() => {
-    const formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2
-    });
-    
-    return (value) => {
-      if (value === undefined || value === null) return 'N/A';
-      return formatter.format(value);
-    };
-  }, []);
-
-  // Memoizes chart data preparation, this avoids recalculating on every render. The chart is sorted by ascending.
+  // Memoize chart data preparation, this avoids recalculating on every render. The chart is sorted by ascending.
   // Data formatted for recharts, displaying the time and stocks for the day's candles.
   const chartData = useMemo(() => {
     if (!historicalData || historicalData.length === 0) {
@@ -93,7 +80,7 @@ const MiniStockChart = ({
       }
       return null;
     };
-  }, [formatCurrency]);
+  }, []);
 
   // Fetch the historical data when component mounts or when stockKey changes.
   useEffect(() => {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Table, Badge, Button, Row, Col } from 'react-bootstrap';
 import marketScheduler from '../../services/MarketScheduler';
+import { formatTime } from '../../lib/utils/dateUtils';
 
 const MarketStatus = () => {
   const [status, setStatus] = useState({});
@@ -16,12 +17,6 @@ const MarketStatus = () => {
     
     return () => clearInterval(timer);
   }, [refreshKey]);
-  
-  //This formats the time to display.
-  const formatTime = (isoString) => {
-    if (!isoString) return 'N/A';
-    return new Date(isoString).toLocaleTimeString();
-  };
   
   const handleTriggerUpdate = async () => {
     try {
@@ -65,7 +60,7 @@ const MarketStatus = () => {
             </tr>
             <tr>
               <td>Local Time</td>
-              <td>{currentTime.toLocaleTimeString()}</td>
+              <td>{formatTime(currentTime)}</td>
             </tr>
             <tr>
               <td>Eastern Time</td>

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { FaBell, FaTrash, FaExclamationCircle, FaArrowLeft } from 'react-icons/fa';
 import { useAuth } from '../../lib/hooks/useAuth';
 import { priceAlertApi } from '../../lib/api';
+import { formatCurrency } from '../../lib/utils/formatUtils';
+import { formatDateTime } from '../../lib/utils/dateUtils';
 import './Notifications.css';
 
 const Notifications = () => {
@@ -134,15 +136,6 @@ const Notifications = () => {
     }
   };
 
-  //Formats the currency values.
-  const formatCurrency = (value) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2
-    }).format(value);
-  };
-
   //Renders function for alert status.
   const renderAlertStatus = (status) => {
     if (status === 'active') {
@@ -224,7 +217,7 @@ const Notifications = () => {
                         Price Alert Triggered! {alert.stock_key} {alert.current_price >= alert.target_price ? 'rose to' : 'fell to'} {formatCurrency(alert.current_price)}, crossing your target of {formatCurrency(alert.target_price)}
                       </p>
                       <small className="text-muted">
-                        Triggered at: {new Date(alert.timestamp).toLocaleString()}
+                        Triggered at: {formatDateTime(alert.timestamp)}
                       </small>
                     </div>
                     <Button
@@ -264,7 +257,7 @@ const Notifications = () => {
                         Target price: {formatCurrency(alert.target_price)}
                       </p>
                       <small className="text-muted">
-                        Created: {new Date(alert.created_at).toLocaleString()}
+                        Created: {formatDateTime(alert.created_at)}
                       </small>
                       <div>{renderAlertStatus(alert.status)}</div>
                     </div>

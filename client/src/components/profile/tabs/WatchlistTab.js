@@ -6,6 +6,8 @@ import MiniStockChart from '../../stock/MiniStockChart';
 import { useDebounce } from '../../../lib/hooks/useDebounce';
 import './TabStyles.css';
 import { stockDataRefreshManager } from '../../../services';
+import { formatCurrency, formatPercentage } from '../../../lib/utils/formatUtils';
+import { formatTime } from '../../../lib/utils/dateUtils';
 
 const WatchlistTab = ({ userId, watchlist: initialWatchlist = [] }) => {
     const [watchlist, setWatchlist] = useState(initialWatchlist);
@@ -148,28 +150,6 @@ const WatchlistTab = ({ userId, watchlist: initialWatchlist = [] }) => {
         await fetchLatestPrices();
         setSuccessMessage('Prices updated successfully');
         setTimeout(() => setSuccessMessage(null), 3000);
-    };
-    
-    const formatCurrency = (value) => {
-        // Handle undefined or NaN
-        if (value === undefined || value === null || isNaN(value)) {
-            return '$0.00';
-        }
-        
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            minimumFractionDigits: 2
-        }).format(value);
-    };
-    
-    const formatPercentage = (value) => {
-        // Handle undefined or NaN
-        if (value === undefined || value === null || isNaN(value)) {
-            return '0.00%';
-        }
-        
-        return `${(value >= 0 ? '+' : '')}${value.toFixed(2)}%`;
     };
     
     //Searchesfor stocks
@@ -513,7 +493,7 @@ const WatchlistTab = ({ userId, watchlist: initialWatchlist = [] }) => {
                     <h3 className="tab-title mb-0">Your Watchlist</h3>
                     {lastUpdated && (
                         <small className="text-muted">
-                            Prices updated {lastUpdated.toLocaleTimeString()}
+                            Prices updated {formatTime(lastUpdated)}
                         </small>
                     )}
                 </div>

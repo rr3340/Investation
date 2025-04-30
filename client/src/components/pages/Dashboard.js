@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../lib/hooks/useAuth';
 import { portfolioApi, investmentApi, stockApi, transactionApi, watchlistApi } from '../../lib/api';
 import { FaChartLine, FaWallet, FaCoins, FaChartBar, FaUser } from 'react-icons/fa';
+import { formatCurrency, formatPercentage } from '../../lib/utils/formatUtils';
+import { formatDate } from '../../lib/utils/dateUtils';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -18,15 +20,6 @@ const Dashboard = () => {
     });
     const [transactions, setTransactions] = useState([]);
     const [watchlist, setWatchlist] = useState([]);
-    
-    // Format currency values
-    const formatCurrency = (value) => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            minimumFractionDigits: 2
-        }).format(value);
-    };
     
     // Fetch all dashboard data
     useEffect(() => {
@@ -127,7 +120,7 @@ const Dashboard = () => {
                                             <h3 className="dashboard-card-title">Net Worth</h3>
                                             <p className="dashboard-card-value">{formatCurrency(portfolioData.netWorth)}</p>
                                             <p className={`dashboard-card-change ${portfolioData.todayChangePercent >= 0 ? 'positive' : 'negative'}`}>
-                                                {portfolioData.todayChangePercent >= 0 ? '+' : ''}{portfolioData.todayChangePercent.toFixed(2)}% today
+                                                {formatPercentage(portfolioData.todayChangePercent, false, true)} today
                                             </p>
                                         </div>
                                     </Card.Body>
@@ -206,24 +199,28 @@ const Dashboard = () => {
                                         <div className="watchlist-highlights">
                                             {watchlist.length > 0 ? (
                                                 <>
-                                                    {watchlist.map((item, index) => (
-                                                        <div key={index} className="watchlist-item">
-                                                            <div className="watchlist-symbol">{item.symbol}</div>
-                                                            <div className="watchlist-price">{formatCurrency(item.price)}</div>
-                                                            <div className={`watchlist-change ${item.change >= 0 ? 'positive' : 'negative'}`}>
-                                                                {item.change >= 0 ? '+' : ''}{item.change.toFixed(2)}%
-                                                            </div>
-                                                        </div>
-                                                    ))}
+                                                    <ul className="watchlist-list">
+                                                        {watchlist.map((item, index) => (
+                                                            <li key={index} className="watchlist-item">
+                                                                <Link to={`/stock/${item.symbol}`} className="watchlist-symbol">
+                                                                    {item.symbol}
+                                                                </Link>
+                                                                <span className="watchlist-price">{formatCurrency(item.price)}</span>
+                                                                <span className={`watchlist-change ${item.change >= 0 ? 'positive' : 'negative'}`}>
+                                                                    {formatPercentage(item.change, false, true)}
+                                                                </span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                    <div className="text-center mt-3">
+                                                        <Button variant="outline-primary" as={Link} to="/watchlist">
+                                                            View Full Watchlist
+                                                        </Button>
+                                                    </div>
                                                 </>
                                             ) : (
                                                 <p className="text-center">No watchlist items. Add stocks to your watchlist.</p>
                                             )}
-                                            <div className="text-center mt-3">
-                                                <Button variant="outline-primary" as={Link} to="/watchlist">
-                                                    View Full Watchlist
-                                                </Button>
-                                            </div>
                                         </div>
                                     </Card.Body>
                                 </Card>
@@ -253,7 +250,7 @@ const Dashboard = () => {
                                                                 {formatCurrency(transaction.price)}
                                                             </div>
                                                             <div className="transaction-date">
-                                                                {new Date(transaction.date || transaction.transaction_date).toLocaleDateString()}
+                                                                {formatDate(transaction.date || transaction.transaction_date)}
                                                             </div>
                                                         </div>
                                                     ))}
